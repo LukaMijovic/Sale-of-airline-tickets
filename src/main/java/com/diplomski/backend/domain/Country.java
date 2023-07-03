@@ -59,4 +59,6 @@ public class Country {
     private Set<City> cities;
     @OneToMany(mappedBy = "country")
     private Set<Airport> airports;
+    @OneToMany(mappedBy = "country")
+    private Set<Airline> airlines;
 }
