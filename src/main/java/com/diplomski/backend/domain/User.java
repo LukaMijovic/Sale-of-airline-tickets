@@ -1,5 +1,6 @@
 package com.diplomski.backend.domain;
 
+import com.diplomski.backend.domain.enumeration.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -13,17 +14,16 @@ import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Data
-@Table(name = "airport_user")
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-    public User(String username, String password, String email, String phone) {
+    public User(String username, String password, String email, String phone,Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
+        this.role=role;
     }
 
     @Id
@@ -39,5 +39,7 @@ public class User {
     private String email;
     @Pattern(regexp = "\\+381\\d{9}",message = "Phone number has to be in format +38160...")
     private String phone;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
