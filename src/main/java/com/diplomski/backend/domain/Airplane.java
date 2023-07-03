@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -55,5 +56,9 @@ public class Airplane {
     @ManyToOne
     @JoinColumn(name = "airline_id")
     private Airline airline;
+    @OneToMany(mappedBy = "airplane")
+    private Set<Flight>  flights;
+    @OneToMany(mappedBy = "airplane")
+    private Set<Seat> seats;
 
 }

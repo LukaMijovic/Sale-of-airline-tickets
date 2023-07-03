@@ -31,9 +31,12 @@ public class Airline {
     private Integer fleetSize;
     private Double fleetAvgAge;
     private Integer yearFounded;
+    private String image;
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
     @OneToMany(mappedBy = "airline")
     private Set<Airplane> airplanes;
+    @OneToMany(mappedBy = "airline")
+    private Set<Route> routes;
 }

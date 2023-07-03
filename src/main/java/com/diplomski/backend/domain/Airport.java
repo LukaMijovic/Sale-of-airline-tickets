@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "airport")
@@ -35,4 +37,8 @@ public class Airport {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+    @OneToMany(mappedBy = "departureAirport")
+    private Set<Route> departures;
+    @OneToMany(mappedBy = "arrivalAirport")
+    private Set<Route> arrivals;
 }
