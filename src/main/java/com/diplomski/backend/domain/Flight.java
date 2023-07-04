@@ -17,6 +17,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Flight {
+    public Flight(LocalDate flightDate, FlightStatus flightStatus, String depGate, Integer depDelay, LocalDateTime depScheduled, LocalDateTime depEstimated, LocalDateTime depActual, String arrGate, Integer arrDelay, LocalDateTime arrScheduled, LocalDateTime arrEstimated, LocalDateTime arrActual, String baggage, LocalDateTime updatedFlight, Airplane airplane, Route route) {
+        this.flightDate = flightDate;
+        this.flightStatus = flightStatus;
+        this.depGate = depGate;
+        this.depDelay = depDelay;
+        this.depScheduled = depScheduled;
+        this.depEstimated = depEstimated;
+        this.depActual = depActual;
+        this.arrGate = arrGate;
+        this.arrDelay = arrDelay;
+        this.arrScheduled = arrScheduled;
+        this.arrEstimated = arrEstimated;
+        this.arrActual = arrActual;
+        this.baggage = baggage;
+        this.updatedFlight = updatedFlight;
+        this.airplane = airplane;
+        this.route = route;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -39,7 +58,7 @@ public class Flight {
     private Integer arrDelay;
     @Column(name = "arr_scheduled")
     private LocalDateTime arrScheduled;
-    @Column(name = "darr_estimated")
+    @Column(name = "arr_estimated")
     private LocalDateTime arrEstimated;
     @Column(name = "arr_actual")
     private LocalDateTime arrActual;

@@ -32,6 +32,10 @@ public class Route {
         this.updatedDate = updatedDate;
     }
 
+    public Route(Integer flight) {
+        this.flight = flight;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

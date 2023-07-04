@@ -23,6 +23,12 @@ public class Airplane {
         this.iataCodeLong = iataCodeLong;
     }
 
+    public Airplane(String iataCodeLong, String icaoCodeHex, String registrationNumber) {
+        this.iataCodeLong = iataCodeLong;
+        this.icaoCodeHex = icaoCodeHex;
+        this.registrationNumber = registrationNumber;
+    }
+
     public Airplane(String iataType, String iataCodeLong, String iataCodeShort, ActiveStatus activeStatus, Integer constructionNumber, LocalDateTime deliveryDate, LocalDateTime firstFlightDate, Integer engineCount, String engineType, String icaoCodeHex, Integer age, String planeOwner, String registrationNumber, LocalDateTime registrationDate, Airline airline) {
         this.iataType = iataType;
         this.iataCodeLong = iataCodeLong;
