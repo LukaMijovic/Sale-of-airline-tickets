@@ -14,7 +14,7 @@ import java.util.Objects;
 public class ErrorResponse {
     private final int status;
     private final String message;
-    private final String stackTrace;
+    private String stackTrace;
     private List<ValidatorError> errors;
 
     @Data
