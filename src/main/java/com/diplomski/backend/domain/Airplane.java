@@ -19,6 +19,28 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class Airplane {
+    public Airplane(String iataCodeLong) {
+        this.iataCodeLong = iataCodeLong;
+    }
+
+    public Airplane(String iataType, String iataCodeLong, String iataCodeShort, ActiveStatus activeStatus, Integer constructionNumber, LocalDateTime deliveryDate, LocalDateTime firstFlightDate, Integer engineCount, String engineType, String icaoCodeHex, Integer age, String planeOwner, String registrationNumber, LocalDateTime registrationDate, Airline airline) {
+        this.iataType = iataType;
+        this.iataCodeLong = iataCodeLong;
+        this.iataCodeShort = iataCodeShort;
+        this.activeStatus = activeStatus;
+        this.constructionNumber = constructionNumber;
+        this.deliveryDate = deliveryDate;
+        this.firstFlightDate = firstFlightDate;
+        this.engineCount = engineCount;
+        this.engineType = engineType;
+        this.icaoCodeHex = icaoCodeHex;
+        this.age = age;
+        this.planeOwner = planeOwner;
+        this.registrationNumber = registrationNumber;
+        this.registrationDate = registrationDate;
+        this.airline = airline;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
