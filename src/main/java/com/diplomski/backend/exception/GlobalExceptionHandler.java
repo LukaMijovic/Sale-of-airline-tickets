@@ -25,9 +25,9 @@ public class GlobalExceptionHandler {
         log.error("Failed to save data from external api");
         return buildErrorResponse(externalAPIException,HttpStatus.CONFLICT,request);
     }
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception,WebRequest request){
+    public ResponseEntity<Object> handleEntityNotFoundException(NoSuchElementFoundException exception, WebRequest request){
         log.error("Failed to find the requested element");
         return buildErrorResponse(exception,HttpStatus.NOT_FOUND,request);
     }
