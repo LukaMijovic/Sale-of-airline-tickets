@@ -14,6 +14,9 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class Country {
+    public Country(@NonNull String iso2Code) {
+        this.iso2Code = iso2Code;
+    }
 
     public Country(@NonNull String name, @NonNull String iso2Code, String iso3Code, Integer population, String capital, String continent, String currencyName, String currencyCode, String phonePrefix) {
         this.name = name;
@@ -61,4 +64,5 @@ public class Country {
     private Set<Airport> airports;
     @OneToMany(mappedBy = "country")
     private Set<Airline> airlines;
+
 }
