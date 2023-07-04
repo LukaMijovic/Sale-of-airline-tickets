@@ -1,5 +1,6 @@
 package com.diplomski.backend.domain;
 
+import com.diplomski.backend.domain.enumeration.ActiveStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -31,6 +32,8 @@ public class Airplane {
     @Size(min=4,max=4,message = "The iata code short has 3 characters")
     @Column(name = "iata_code_short")
     private String iataCodeShort;
+    @Enumerated(EnumType.STRING)
+    private ActiveStatus activeStatus;
     @Column(name = "construction_number")
     private Integer constructionNumber;
     @Column(name = "delivery_date")

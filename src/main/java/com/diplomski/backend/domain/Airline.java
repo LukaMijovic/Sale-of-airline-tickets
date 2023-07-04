@@ -1,5 +1,6 @@
 package com.diplomski.backend.domain;
 
+import com.diplomski.backend.domain.enumeration.ActiveStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,6 +29,8 @@ public class Airline {
     @Size(min = 3,max = 3,message = "Icao code have 2 characters")
     private String icaoCode;
     private String callsign;
+    @Enumerated(EnumType.STRING)
+    private ActiveStatus activeStatus;
     private Integer fleetSize;
     private Double fleetAvgAge;
     private Integer yearFounded;
