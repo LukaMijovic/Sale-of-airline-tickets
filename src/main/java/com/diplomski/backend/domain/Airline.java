@@ -18,6 +18,23 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class Airline {
+    public Airline(String name, String iataCode, String icaoCode, String callsign, ActiveStatus activeStatus, Integer fleetSize, Double fleetAvgAge, Integer yearFounded, String image, Country country) {
+        this.name = name;
+        this.iataCode = iataCode;
+        this.icaoCode = icaoCode;
+        this.callsign = callsign;
+        this.activeStatus = activeStatus;
+        this.fleetSize = fleetSize;
+        this.fleetAvgAge = fleetAvgAge;
+        this.yearFounded = yearFounded;
+        this.image = image;
+        this.country = country;
+    }
+
+    public Airline(String iataCode) {
+        this.iataCode = iataCode;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

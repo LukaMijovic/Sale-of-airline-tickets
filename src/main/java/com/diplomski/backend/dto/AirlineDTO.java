@@ -14,9 +14,10 @@ public record AirlineDTO(
         String icaoCode,
         String callsign,
         ActiveStatus activeStatus,
-        String fleetSize,
-        String fleetAverageAge,
+        Integer fleetSize,
+        Double fleetAverageAge,
         Integer yearFounded,
+        CountryDTO countryDTO,
         String image
 ) {
 }
