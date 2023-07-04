@@ -4,11 +4,13 @@ import com.diplomski.backend.external.Pagination;
 import com.diplomski.backend.external.ResponseExternal;
 import com.diplomski.backend.external.util.ExternalMapper;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Data
 public abstract class ExternalService<E,EDTO> {
+    @Autowired
     protected PaginationService paginationService;
     protected ExternalMapper<E,EDTO> mapper;
     private List<E> convert(List<EDTO> list){
