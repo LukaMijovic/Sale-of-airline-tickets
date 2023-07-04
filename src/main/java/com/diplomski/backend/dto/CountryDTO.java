@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record CountryDTO(
         Long id,
+        String name,
         String iso2,
         String iso3,
         Integer population,
