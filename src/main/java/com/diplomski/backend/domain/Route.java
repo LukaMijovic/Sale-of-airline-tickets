@@ -18,6 +18,20 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class Route {
+
+    public Route(Integer flight, Airport departureAirport, String departureTerminal, LocalTime departureTime, Airport arrivalAirport, String arrivalTerminal, LocalTime arrivalTime, Airline airline, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.flight = flight;
+        this.departureAirport = departureAirport;
+        this.departureTerminal = departureTerminal;
+        this.departureTime = departureTime;
+        this.arrivalAirport = arrivalAirport;
+        this.arrivalTerminal = arrivalTerminal;
+        this.arrivalTime = arrivalTime;
+        this.airline = airline;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

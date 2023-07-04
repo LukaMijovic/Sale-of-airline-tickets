@@ -10,7 +10,6 @@ import java.time.LocalTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AirportUtilEDTO {
     String airport;
-    String timezone;
     String iata;
     String icao;
     String terminal;

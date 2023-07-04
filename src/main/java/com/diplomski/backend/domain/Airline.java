@@ -35,6 +35,12 @@ public class Airline {
         this.iataCode = iataCode;
     }
 
+    public Airline(String name, String iataCode, String icaoCode) {
+        this.name = name;
+        this.iataCode = iataCode;
+        this.icaoCode = icaoCode;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
