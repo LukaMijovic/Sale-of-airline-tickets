@@ -14,7 +14,7 @@ public abstract class ExternalService<E,EDTO> {
     private List<E> convert(List<EDTO> list){
         return mapper.convertToEntities(list);
     }
-    abstract void saveObjects(List<E> list);
+    abstract List<E> saveObjects(List<E> list);
     public void saveExternalCall(ResponseExternal<EDTO> responseExternal,ExternalMapper externalMapper){
         setMapper(externalMapper);
         List<E> entities=convert(responseExternal.getData());
