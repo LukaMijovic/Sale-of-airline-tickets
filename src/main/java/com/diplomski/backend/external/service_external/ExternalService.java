@@ -6,6 +6,7 @@ import com.diplomski.backend.external.util.ExternalMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -17,7 +18,9 @@ public abstract class ExternalService<E,EDTO> {
         return mapper.convertToEntities(list);
     }
     abstract List<E> saveObjects(List<E> list);
-    public void saveExternalCall(ResponseExternal<EDTO> responseExternal,ExternalMapper externalMapper){
+    public void saveExternalCall(ResponseExternal<EDTO> responseExternal,ExternalMapper externalMapper,String message){
+        responseExternal.getPagination().setMessage(message);
+        responseExternal.getPagination().setCallingTime(LocalDateTime.now());
         setMapper(externalMapper);
         List<E> entities=convert(responseExternal.getData());
         paginationService.savePagination(responseExternal.getPagination());

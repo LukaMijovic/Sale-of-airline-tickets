@@ -27,7 +27,7 @@ public class CountryExternalController extends ExternalController{
         ParameterizedTypeReference<ResponseExternal<CountryEDTO>> responseType=new ParameterizedTypeReference<ResponseExternal<CountryEDTO>>() {};
         ResponseEntity<ResponseExternal<CountryEDTO>> responseEntity=restTemplate.exchange(url, HttpMethod.GET,null,responseType);
         response=responseEntity.getBody();
-        countryExternalService.saveExternalCall(response,new CountryExternalMapper());
+        countryExternalService.saveExternalCall(response,new CountryExternalMapper(),"Saving countries...");
         return ResponseEntity.noContent().build();
     }
 }

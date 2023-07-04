@@ -19,7 +19,7 @@ public class City {
         this.iataCode = iataCode;
     }
 
-    public City(String name, String iataCode, double latitude, double longitude, String timezone, Country country) {
+    public City(String name, String iataCode, Double latitude, Double longitude, String timezone, Country country) {
         this.name = name;
         this.iataCode = iataCode;
         this.latitude = latitude;
@@ -38,8 +38,8 @@ public class City {
     @NotNull
     @Size(min =3,max = 3,message = "Iata code must have 3 character")
     private String iataCode;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
     private String timezone;
     @ManyToOne
     @JoinColumn(name = "country_id",nullable = true)
