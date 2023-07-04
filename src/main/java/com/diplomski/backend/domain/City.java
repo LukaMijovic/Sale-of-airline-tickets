@@ -15,6 +15,10 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class City {
+    public City(String iataCode) {
+        this.iataCode = iataCode;
+    }
+
     public City(String name, String iataCode, double latitude, double longitude, String timezone, Country country) {
         this.name = name;
         this.iataCode = iataCode;

@@ -15,6 +15,27 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class Airport {
+    public Airport(String iataCode) {
+        this.iataCode = iataCode;
+    }
+
+    public Airport(String name, String iataCode, String icaoCode) {
+        this.name = name;
+        this.iataCode = iataCode;
+        this.icaoCode = icaoCode;
+    }
+
+    public Airport(String name, String iataCode, String icaoCode, double latitude, double longitude, String phoneNumber, Country country, City city) {
+        this.name = name;
+        this.iataCode = iataCode;
+        this.icaoCode = icaoCode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.city = city;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
