@@ -26,6 +26,7 @@ public class FlightExternalMapper implements ExternalMapper<Flight, FlightEDTO> 
                 flightEDTO.getArrival().getEstimated(),
                 flightEDTO.getArrival().getActual(),
                 flightEDTO.getArrival().getBaggage(),
+                LocalDateTime.MIN,
                 LocalDateTime.now(),
                 new Airplane(flightEDTO.getAircraft().getIata(),flightEDTO.getAircraft().getIcao24(),flightEDTO.getAircraft().getRegistration()),
                 new Route(flightEDTO.getFlight().getNumber())

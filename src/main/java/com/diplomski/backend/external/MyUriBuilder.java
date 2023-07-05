@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyUriBuilder {
     @Value("${external.api.url}")
-    private String baseUrl;
+    private  String baseUrl;
     @Value("${external.api.access-key}")
     private String accessKey;
 

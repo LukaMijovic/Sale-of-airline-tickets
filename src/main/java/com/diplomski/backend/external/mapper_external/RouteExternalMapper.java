@@ -21,7 +21,7 @@ public class RouteExternalMapper implements ExternalMapper<Route, RouteEDTO>{
                 routeEDTO.getArrival().getTerminal(),
                 routeEDTO.getArrival().getActual().toLocalTime(),
                 new Airline(routeEDTO.getAirline().getName(),routeEDTO.getAirline().getIata(),routeEDTO.getAirline().getIcao()),
-                null,
+                LocalDateTime.MIN,
                 LocalDateTime.now()
                 );
     }

@@ -34,6 +34,27 @@ public class Flight {
         this.updatedFlight = updatedFlight;
         this.airplane = airplane;
         this.route = route;
+        this.createdFlight=LocalDateTime.now();
+    }
+
+    public Flight(LocalDate flightDate, FlightStatus flightStatus, String depGate, Integer depDelay, LocalDateTime depScheduled, LocalDateTime depEstimated, LocalDateTime depActual, String arrGate, Integer arrDelay, LocalDateTime arrScheduled, LocalDateTime arrEstimated, LocalDateTime arrActual, String baggage, LocalDateTime createdFlight, LocalDateTime updatedFlight, Airplane airplane, Route route) {
+        this.flightDate = flightDate;
+        this.flightStatus = flightStatus;
+        this.depGate = depGate;
+        this.depDelay = depDelay;
+        this.depScheduled = depScheduled;
+        this.depEstimated = depEstimated;
+        this.depActual = depActual;
+        this.arrGate = arrGate;
+        this.arrDelay = arrDelay;
+        this.arrScheduled = arrScheduled;
+        this.arrEstimated = arrEstimated;
+        this.arrActual = arrActual;
+        this.baggage = baggage;
+        this.createdFlight = createdFlight;
+        this.updatedFlight = updatedFlight;
+        this.airplane = airplane;
+        this.route = route;
     }
 
     @Id
@@ -63,6 +84,8 @@ public class Flight {
     @Column(name = "arr_actual")
     private LocalDateTime arrActual;
     private String baggage;
+    @Column(name = "created_flight")
+    private LocalDateTime createdFlight;
     @Column(name = "updated_flight")
     private LocalDateTime updatedFlight;
     @ManyToOne
