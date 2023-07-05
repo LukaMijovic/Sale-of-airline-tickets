@@ -2,15 +2,13 @@ package com.diplomski.backend.external.controller_external;
 
 import com.diplomski.backend.external.ResponseExternal;
 import com.diplomski.backend.external.dto_external.CityEDTO;
-import com.diplomski.backend.external.dto_external.CountryEDTO;
 import com.diplomski.backend.external.service_external.CityExternalService;
-import com.diplomski.backend.external.util.CityExternalMapper;
+import com.diplomski.backend.external.mapper_external.CityExternalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

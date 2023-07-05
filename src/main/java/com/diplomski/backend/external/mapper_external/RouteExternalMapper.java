@@ -1,4 +1,4 @@
-package com.diplomski.backend.external.util;
+package com.diplomski.backend.external.mapper_external;
 
 import com.diplomski.backend.domain.Airline;
 import com.diplomski.backend.domain.Airport;
@@ -12,6 +12,8 @@ public class RouteExternalMapper implements ExternalMapper<Route, RouteEDTO>{
     public Route convertToEntity(RouteEDTO routeEDTO) {
         return new Route(
                 routeEDTO.getFlight().getNumber(),
+                routeEDTO.getFlight().getIata(),
+                routeEDTO.getFlight().getIcao(),
                 new Airport(routeEDTO.getDeparture().getAirport(),routeEDTO.getDeparture().getIata(),routeEDTO.getDeparture().getIcao()),
                 routeEDTO.getDeparture().getTerminal(),
                 routeEDTO.getDeparture().getActual().toLocalTime(),

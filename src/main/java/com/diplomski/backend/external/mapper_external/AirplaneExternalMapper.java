@@ -1,11 +1,9 @@
-package com.diplomski.backend.external.util;
+package com.diplomski.backend.external.mapper_external;
 
 import com.diplomski.backend.domain.Airline;
 import com.diplomski.backend.domain.Airplane;
 import com.diplomski.backend.domain.enumeration.ActiveStatus;
 import com.diplomski.backend.external.dto_external.AirplaneEDTO;
-
-import java.time.LocalDateTime;
 
 public class AirplaneExternalMapper implements ExternalMapper<Airplane, AirplaneEDTO>{
     @Override

@@ -9,6 +9,8 @@ public record RouteDTO(
         Long id,
         @NotNull(message = "The flight has to a non null value")
         Integer flight,
+        String iataFlight,
+        String icaoFlight,
         AirportDTO departureAirport,
         String departureTerminal,
         LocalTime departureTime,

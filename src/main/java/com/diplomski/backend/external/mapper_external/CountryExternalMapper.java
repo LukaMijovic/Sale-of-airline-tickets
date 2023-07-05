@@ -1,4 +1,4 @@
-package com.diplomski.backend.external.util;
+package com.diplomski.backend.external.mapper_external;
 
 import com.diplomski.backend.domain.Country;
 import com.diplomski.backend.external.dto_external.CountryEDTO;

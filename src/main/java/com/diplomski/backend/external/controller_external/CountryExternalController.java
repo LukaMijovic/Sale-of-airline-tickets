@@ -3,7 +3,7 @@ package com.diplomski.backend.external.controller_external;
 import com.diplomski.backend.external.ResponseExternal;
 import com.diplomski.backend.external.dto_external.CountryEDTO;
 import com.diplomski.backend.external.service_external.CountryExternalService;
-import com.diplomski.backend.external.util.CountryExternalMapper;
+import com.diplomski.backend.external.mapper_external.CountryExternalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;

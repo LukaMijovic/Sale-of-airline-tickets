@@ -1,8 +1,7 @@
 package com.diplomski.backend.external.service_external;
 
-import com.diplomski.backend.external.Pagination;
 import com.diplomski.backend.external.ResponseExternal;
-import com.diplomski.backend.external.util.ExternalMapper;
+import com.diplomski.backend.external.mapper_external.ExternalMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 

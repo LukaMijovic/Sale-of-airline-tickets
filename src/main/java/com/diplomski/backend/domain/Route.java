@@ -19,8 +19,10 @@ import java.util.Set;
 @Builder
 public class Route {
 
-    public Route(Integer flight, Airport departureAirport, String departureTerminal, LocalTime departureTime, Airport arrivalAirport, String arrivalTerminal, LocalTime arrivalTime, Airline airline, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public Route(Integer flight,String iataFlight,String icaoFlight, Airport departureAirport, String departureTerminal, LocalTime departureTime, Airport arrivalAirport, String arrivalTerminal, LocalTime arrivalTime, Airline airline, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.flight = flight;
+        this.iataFlight=iataFlight;
+        this.icaoFlight=icaoFlight;
         this.departureAirport = departureAirport;
         this.departureTerminal = departureTerminal;
         this.departureTime = departureTime;
@@ -41,6 +43,12 @@ public class Route {
     private Long id;
     @NotNull(message = "The flight has to a non null value")
     private Integer flight;
+    @NotNull(message = "The flight iata code has to a non null values")
+    @Column(name = "flight_iata")
+    private String iataFlight;
+    @NotNull(message = "The flight icao code has to a non null values")
+    @Column(name = "flight_icao")
+    private String icaoFlight;
     @ManyToOne
     @JoinColumn(name = "dep_airport_id")
     private Airport departureAirport;
