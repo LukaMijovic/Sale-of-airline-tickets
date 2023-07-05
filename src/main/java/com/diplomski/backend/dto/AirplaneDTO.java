@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record AirplaneDTO(
@@ -15,7 +16,7 @@ public record AirplaneDTO(
         @NotNull(message = "The iata code short must not be a null value")
         @Size(min=4,max=4,message = "The iata code short has 3 characters")
         String iataCodeShort,
-        Integer constructionNumber,
+        String constructionNumber,
         ActiveStatus activeStatus,
         LocalDateTime deliveryDate,
         LocalDateTime firstFlightDate,
@@ -26,7 +27,7 @@ public record AirplaneDTO(
         Integer age,
         String planeOwner,
         String registrationNumber,
-        String registrationDate,
+        LocalDate registrationDate,
         AirlineDTO airlineDTO
 ) {
 }

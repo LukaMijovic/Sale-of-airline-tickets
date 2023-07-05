@@ -21,7 +21,7 @@ public class AirportExternalController extends ExternalController {
     @Override
     public ResponseEntity<Void> saveAllFromExternal() {
         myUriBuilder.setEndpoint("airports");
-        myUriBuilder.addParameters("limit",5000);
+        myUriBuilder.addParameters("limit",6000);
         String url= myUriBuilder.getUri();
         ResponseExternal response;
         ParameterizedTypeReference<ResponseExternal<AirportEDTO>> responseType=new ParameterizedTypeReference<ResponseExternal<AirportEDTO>>() {};

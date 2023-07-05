@@ -40,7 +40,7 @@ public class RouteExternalService extends ExternalService<Route, RouteEDTO> {
                                 Airline airline=airlineService.findByIataCode(route.getAirline());
                                 Airport arrival=airportService.findByIataCode(route.getArrivalAirport());
                                 Airport departure=airportService.findByIataCode(route.getDepartureAirport());
-
+                                System.out.println(1);
                                 route.setAirline(airline);
                                 route.setArrivalAirport(arrival);
                                 route.setDepartureAirport(departure);
@@ -53,5 +53,10 @@ public class RouteExternalService extends ExternalService<Route, RouteEDTO> {
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList())
         );
+    }
+
+    @Override
+    protected RouteEDTO trimList(RouteEDTO routeEDTO) {
+        return routeEDTO;
     }
 }

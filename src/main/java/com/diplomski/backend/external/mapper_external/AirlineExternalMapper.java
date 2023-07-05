@@ -17,6 +17,6 @@ public class AirlineExternalMapper implements ExternalMapper<Airline, AirlineEDT
                 airlineEDTO.getFleetAverageAge(),
                 airlineEDTO.getYearFounded(),
                 null,
-                new Country(airlineEDTO.getCountryName(), airlineEDTO.getCountryIso2()));
+                new Country(airlineEDTO.getCountryIso2()));
     }
 }

@@ -21,7 +21,7 @@ public class AirplaneExternalMapper implements ExternalMapper<Airplane, Airplane
                 airplaneEDTO.getAge(),
                 airplaneEDTO.getPlaneOwner(),
                 airplaneEDTO.getRegistrationNumber(),
-                airplaneEDTO.getDeliveryDate(),
-                new Airline(airplaneEDTO.getAirlineIata()));
+                airplaneEDTO.getRegistrationDate(),
+                new Airline(airplaneEDTO.getAirlineIata(),airplaneEDTO.getAirlineIcao()));
     }
 }

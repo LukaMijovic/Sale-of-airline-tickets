@@ -21,7 +21,7 @@ public class AirplaneExternalController extends ExternalController {
     @Override
     public ResponseEntity<Void> saveAllFromExternal() {
         myUriBuilder.setEndpoint("airplanes");
-        myUriBuilder.addParameters("limit",10000);
+        myUriBuilder.addParameters("limit",19000);
         String url= myUriBuilder.getUri();
         ResponseExternal response;
         ParameterizedTypeReference<ResponseExternal<AirplaneEDTO>> responseType=new ParameterizedTypeReference<ResponseExternal<AirplaneEDTO>>() {};

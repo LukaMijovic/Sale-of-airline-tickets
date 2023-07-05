@@ -41,4 +41,12 @@ public class AirportExternalService extends ExternalService<Airport, AirportEDTO
         }
         return airportRepository.saveAll(newList).stream().toList();
     }
+
+    @Override
+    protected AirportEDTO trimList(AirportEDTO airportEDTO) {
+        if(airportEDTO.getCityIataCode()==null || airportEDTO.getCountryName()==null || airportEDTO.getCountryIso2()==null){
+            return null;
+        }
+        return airportEDTO;
+    }
 }

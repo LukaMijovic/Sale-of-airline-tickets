@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Data
 public abstract class ExternalService<E,EDTO> {
@@ -14,7 +16,13 @@ public abstract class ExternalService<E,EDTO> {
     protected PaginationService paginationService;
     protected ExternalMapper<E,EDTO> mapper;
     private List<E> convert(List<EDTO> list){
-        return mapper.convertToEntities(list);
+
+        return mapper.convertToEntities(
+                list.stream()
+                        .map(edto -> trimList(edto))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList())
+        );
     }
     abstract List<E> saveObjects(List<E> list);
     public void saveExternalCall(ResponseExternal<EDTO> responseExternal,ExternalMapper externalMapper,String message){
@@ -25,4 +33,5 @@ public abstract class ExternalService<E,EDTO> {
         paginationService.savePagination(responseExternal.getPagination());
         saveObjects(entities);
     }
+    protected abstract EDTO trimList(EDTO edto);
 }

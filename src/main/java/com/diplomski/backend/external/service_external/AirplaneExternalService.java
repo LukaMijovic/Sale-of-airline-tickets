@@ -28,6 +28,7 @@ public class AirplaneExternalService extends ExternalService<Airplane, AirplaneE
                             try{
                                 Airline airline=airlineService.findByIataCode(airplane.getAirline());
                                 airplane.setAirline(airline);
+                                System.out.println(airplane.getFirstFlightDate());
                                 return airplane;
                             }catch (NoSuchElementFoundException ex){
                                 return null;
@@ -36,5 +37,13 @@ public class AirplaneExternalService extends ExternalService<Airplane, AirplaneE
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList())
         );
+    }
+
+    @Override
+    protected AirplaneEDTO trimList(AirplaneEDTO airplaneEDTO) {
+        if(airplaneEDTO.getAirlineIata()==null){
+            return null;
+        }
+        return airplaneEDTO;
     }
 }

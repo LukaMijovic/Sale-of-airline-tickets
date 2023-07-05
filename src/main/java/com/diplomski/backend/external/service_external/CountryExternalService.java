@@ -14,9 +14,14 @@ public class CountryExternalService extends ExternalService<Country, CountryEDTO
     private CountryRepository countryRepository;
     @Override
     List<Country> saveObjects(List<Country> list) {
-        List<Country> newList=list.stream().filter(country -> country.getContinent().contains("EU")
-                && country.getIso2Code()!=null && !country.getIso2Code().equals(""))
+        List<Country> newList=list.stream().filter(country ->
+                 country.getIso2Code()!=null && !country.getIso2Code().equals(""))
                 .toList();
         return countryRepository.saveAll(newList).stream().toList();
+    }
+
+    @Override
+    protected CountryEDTO trimList(CountryEDTO countryEDTO) {
+        return countryEDTO;
     }
 }

@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -29,7 +31,7 @@ public class Airplane {
         this.registrationNumber = registrationNumber;
     }
 
-    public Airplane(String iataType, String iataCodeLong, String iataCodeShort, ActiveStatus activeStatus, Integer constructionNumber, LocalDateTime deliveryDate, LocalDateTime firstFlightDate, Integer engineCount, String engineType, String icaoCodeHex, Integer age, String planeOwner, String registrationNumber, LocalDateTime registrationDate, Airline airline) {
+    public Airplane(String iataType, String iataCodeLong, String iataCodeShort, ActiveStatus activeStatus, String constructionNumber, LocalDateTime deliveryDate, LocalDateTime firstFlightDate, Integer engineCount, String engineType, String icaoCodeHex, Integer age, String planeOwner, String registrationNumber, LocalDateTime registrationDate, Airline airline) {
         this.iataType = iataType;
         this.iataCodeLong = iataCodeLong;
         this.iataCodeShort = iataCodeShort;
@@ -63,7 +65,7 @@ public class Airplane {
     @Enumerated(EnumType.STRING)
     private ActiveStatus activeStatus;
     @Column(name = "construction_number")
-    private Integer constructionNumber;
+    private String constructionNumber;
     @Column(name = "delivery_date")
     private LocalDateTime deliveryDate;
     @Column(name = "first_flight_date")

@@ -36,4 +36,12 @@ public class CityExternalService extends ExternalService<City, CityEDTO> {
         }
         return cityRepository.saveAll(newList).stream().toList();
     }
+
+    @Override
+    protected CityEDTO trimList(CityEDTO cityEDTO) {
+        if(cityEDTO.getCountryIso2()==null){
+            return null;
+        }
+        return cityEDTO;
+    }
 }

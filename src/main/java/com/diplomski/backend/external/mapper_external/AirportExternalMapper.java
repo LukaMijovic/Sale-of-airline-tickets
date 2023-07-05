@@ -14,7 +14,7 @@ public class AirportExternalMapper implements ExternalMapper<Airport, AirportEDT
                 airportEDTO.getLatitude(),
                 airportEDTO.getLongitude(),
                 airportEDTO.getPhoneNumber(),
-                new Country(airportEDTO.getCountryName(), airportEDTO.getCountryIso2()),
+                new Country(airportEDTO.getCountryIso2()),
                 new City(airportEDTO.getCityIataCode()));
     }
 }

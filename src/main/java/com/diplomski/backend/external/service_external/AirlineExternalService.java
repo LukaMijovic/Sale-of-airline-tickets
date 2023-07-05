@@ -5,6 +5,7 @@ import com.diplomski.backend.domain.Country;
 import com.diplomski.backend.exception.NoSuchElementFoundException;
 import com.diplomski.backend.external.dto_external.AirlineEDTO;
 import com.diplomski.backend.repository.AirlineRepository;
+import com.diplomski.backend.service.AirlineService;
 import com.diplomski.backend.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,14 @@ public class AirlineExternalService extends ExternalService<Airline, AirlineEDTO
     private CountryService countryService;
     @Autowired
     private AirlineRepository airlineRepository;
+    @Autowired
+    private AirlineService airlineService;
     @Override
     List<Airline> saveObjects(List<Airline> list) {
         return airlineRepository.saveAll(
                 list.stream()
-                .filter(airline -> airline.getIataCode()!=null)
+                .filter(airline -> airline.getIataCode()!=null).
+                        filter(airline -> !airlineService.existIataCodeAndIcaoCode(airline))
                 .map(airline -> {
                     try{
                         Country country=countryService.findByCodeIso2(airline.getCountry());
@@ -36,5 +40,13 @@ public class AirlineExternalService extends ExternalService<Airline, AirlineEDTO
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList())
         );
+    }
+
+    @Override
+    protected AirlineEDTO trimList(AirlineEDTO airlineEDTO) {
+        if(airlineEDTO.getCountryName()==null || airlineEDTO.getCountryIso2()==null){
+            return null;
+        }
+        return airlineEDTO;
     }
 }

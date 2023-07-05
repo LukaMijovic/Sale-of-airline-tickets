@@ -70,7 +70,7 @@ public class Route {
     private LocalDateTime createdDate;
     @Column(name = "update_date")
     private LocalDateTime updatedDate;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "route")
+    @OneToMany(cascade ={CascadeType.MERGE,CascadeType.REMOVE},mappedBy = "route")
     private Set<Flight> flights;
 
 }

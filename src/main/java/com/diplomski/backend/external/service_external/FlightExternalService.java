@@ -21,13 +21,16 @@ public class FlightExternalService extends ExternalService<Flight, FlightEDTO> {
     private RouteService routeService;
     @Override
     List<Flight> saveObjects(List<Flight> list) {
+        System.out.println(list==null);
         return flightRepository.saveAll(
                 list.stream()
-                        .filter(flight -> flight.getRoute().getFlight()!=null)
+                        //.filter(flight -> flight.getRoute().getFlight()!=null)
                         .map(flight -> {
                             try{
+                                System.out.println(1);
                                 Route route=routeService.findByFlightNumber(flight.getRoute());
                                 flight.setRoute(route);
+                                System.out.println(1);
                                 return flight;
                             }catch (NoSuchElementFoundException ex){
                                 return null;
@@ -36,5 +39,10 @@ public class FlightExternalService extends ExternalService<Flight, FlightEDTO> {
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList())
         );
+    }
+
+    @Override
+    protected FlightEDTO trimList(FlightEDTO flightEDTO) {
+        return flightEDTO;
     }
 }
