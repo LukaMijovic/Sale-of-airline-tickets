@@ -6,9 +6,15 @@ import com.diplomski.backend.domain.enumeration.ActiveStatus;
 import com.diplomski.backend.exception.NoSuchElementFoundException;
 import com.diplomski.backend.repository.AirlineRepository;
 import com.diplomski.backend.service.AirlineService;
+import jakarta.transaction.NotSupportedException;
+import jdk.jshell.spi.ExecutionControl;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +45,10 @@ public class AirlineServiceImp implements AirlineService {
             throw  new NoSuchElementFoundException("Airline with iata code "+airline.getIataCode()+" does not exist");
         }
         return optionalAirline.get();
+    }
+
+    @Override
+    public List<Airplane> findAllAirplaneByAirline(Airline airline) throws NoSuchElementFoundException {
+        throw new NotImplementedException("Not yet implemented...");
     }
 }

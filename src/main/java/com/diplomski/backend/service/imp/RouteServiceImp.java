@@ -7,6 +7,8 @@ import com.diplomski.backend.external.service_external.ExternalService;
 import com.diplomski.backend.repository.RouteRepository;
 import com.diplomski.backend.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -33,5 +35,10 @@ public class RouteServiceImp implements RouteService {
             return false;
         }
 
+    }
+
+    @Override
+    public Page<Route> findAll() {
+        return routeRepository.findAll(PageRequest.of(0,30));
     }
 }
