@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -60,6 +62,7 @@ public class Flight {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(name = "flight_date")
     private LocalDate flightDate;
     @Enumerated(EnumType.STRING)
     private FlightStatus flightStatus;
