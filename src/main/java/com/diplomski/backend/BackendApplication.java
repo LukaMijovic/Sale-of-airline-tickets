@@ -15,6 +15,8 @@ public class BackendApplication {
 	private MyFakerServis myFakerServis;
 	@Value("${myapp.seed.flight}")
 	private boolean flightSeed;
+	@Value("${myapp.seed.seat}")
+	private boolean seatSeed;
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}
@@ -23,5 +25,10 @@ public class BackendApplication {
 	public void setUpFlight(){
 		if(flightSeed)
 			myFakerServis.initFlights();
+		if(seatSeed){
+			System.out.println(1);
+			myFakerServis.initSeats();
+		}
+
 	}
 }

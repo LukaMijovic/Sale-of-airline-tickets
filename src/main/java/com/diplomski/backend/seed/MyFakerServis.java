@@ -1,11 +1,10 @@
 package com.diplomski.backend.seed;
 
-import com.diplomski.backend.domain.Airline;
-import com.diplomski.backend.domain.Airplane;
-import com.diplomski.backend.domain.Flight;
-import com.diplomski.backend.domain.Route;
+import com.diplomski.backend.domain.*;
 import com.diplomski.backend.repository.FlightRepository;
+import com.diplomski.backend.repository.SeatRepository;
 import com.diplomski.backend.seed.flight.FlightFaker;
+import com.diplomski.backend.seed.seat.SeatFaker;
 import com.diplomski.backend.service.AirlineService;
 import com.diplomski.backend.service.AirplaneService;
 import com.diplomski.backend.service.RouteService;
@@ -18,12 +17,15 @@ import java.util.List;
 @Service
 public class MyFakerServis {
     private FlightFaker flightFaker;
+    private SeatFaker seatFaker;
     @Autowired
     private RouteService routeService;
     @Autowired
     private FlightRepository flightRepository;
     @Autowired
     private AirplaneService airplaneService;
+    @Autowired
+    private SeatRepository seatRepository;
 
     public void initFlights(){
         List<Route> routes=routeService.findAll().stream().toList();
@@ -36,6 +38,16 @@ public class MyFakerServis {
             } catch (ParseException e) {
                 System.out.println("Excepton: "+e.getMessage());
             }
+        }
+    }
+    public void initSeats(){
+        List<Airplane> airplanes=airplaneService.findAll();
+        for(Airplane airplane:airplanes){
+            seatFaker=new SeatFaker();
+            //System.out.println(11);
+            List<Seat> seats=seatFaker.generateSeats(airplane);
+           // System.out.println(1);
+            seatRepository.saveAll(seats);
         }
     }
 }

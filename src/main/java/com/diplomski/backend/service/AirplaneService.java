@@ -10,4 +10,5 @@ public interface AirplaneService {
     public Airplane findByIataCodeLong(Airplane airplane) throws NoSuchElementFoundException;
 
     List<Airplane> findAllByAirline(Airline airline);
+    List<Airplane> findAll();
 }

@@ -28,4 +28,9 @@ public class AirplaneServiceImp implements AirplaneService {
     public List<Airplane> findAllByAirline(Airline airline) {
        return airplaneRepository.findAllByAirlineId(airline.getId());
     }
+
+    @Override
+    public List<Airplane> findAll() {
+        return airplaneRepository.findAll();
+    }
 }
