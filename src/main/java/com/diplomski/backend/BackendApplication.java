@@ -26,7 +26,7 @@ public class BackendApplication {
 		if(flightSeed)
 			myFakerServis.initFlights();
 		if(seatSeed){
-			System.out.println(1);
+			//System.out.println(1);
 			myFakerServis.initSeats();
 		}
 
