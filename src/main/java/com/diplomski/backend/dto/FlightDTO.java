@@ -21,7 +21,8 @@ public record FlightDTO(
         LocalDateTime arrivalActual,
         String baggage,
         LocalDateTime updateFlight,
-        AirplaneDTO airplane
+        AirplaneDTO airplane,
+        RouteDTO route
 
 ) {
 }

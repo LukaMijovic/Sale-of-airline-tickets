@@ -32,6 +32,10 @@ public class MyFakerServis {
         for(Route route: routes){
             flightFaker=new FlightFaker();
             Airplane airplane=flightFaker.getRandomAirplane(airplaneService.findAllByAirline(route.getAirline()));
+            if(airplane==null){
+                continue;
+            }
+            System.out.println(airplane.getId());
             try {
                 List<Flight> flights=flightFaker.generateFlights(route,airplane);
                 flightRepository.saveAll(flights);

@@ -14,6 +14,6 @@ public interface Mapper<E,DTO> {
         return dtos.stream().map(this::DTOtoEntity).toList();
     }
     default Page<DTO> entitiesToDTOs(Page<E> entities){
-        return (Page<DTO>) entities.stream().map(this::entityToDTO).toList();
+        return entities.map(this::entityToDTO);
     }
 }

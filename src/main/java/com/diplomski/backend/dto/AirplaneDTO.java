@@ -27,7 +27,7 @@ public record AirplaneDTO(
         Integer age,
         String planeOwner,
         String registrationNumber,
-        LocalDate registrationDate,
+        LocalDateTime registrationDate,
         AirlineDTO airlineDTO
 ) {
 }
