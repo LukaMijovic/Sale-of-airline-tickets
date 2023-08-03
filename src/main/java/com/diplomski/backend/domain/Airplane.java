@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -92,6 +93,6 @@ public class Airplane {
     @OneToMany(mappedBy = "airplane")
     private Set<Flight>  flights;
     @OneToMany(mappedBy = "airplane")
-    private Set<Seat> seats;
+    private List<Seat> seats;
 
 }

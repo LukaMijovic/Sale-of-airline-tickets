@@ -2,14 +2,17 @@ package com.diplomski.backend.service.imp;
 
 import com.diplomski.backend.domain.Airline;
 import com.diplomski.backend.domain.Airplane;
+import com.diplomski.backend.domain.Seat;
 import com.diplomski.backend.exception.NoSuchElementFoundException;
 import com.diplomski.backend.repository.AirplaneRepository;
 import com.diplomski.backend.service.AirplaneService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AirplaneServiceImp implements AirplaneService {
@@ -32,5 +35,14 @@ public class AirplaneServiceImp implements AirplaneService {
     @Override
     public List<Airplane> findAll() {
         return airplaneRepository.findAll();
+    }
+
+    @Override
+    public List<Seat> findAllSeats(Long id) throws EntityNotFoundException {
+        Optional<Airplane> optionalAirplane=airplaneRepository.findById(id);
+        if(!optionalAirplane.isPresent()){
+            throw new EntityNotFoundException("Airplane with this id does not exist");
+        }
+        return optionalAirplane.get().getSeats();
     }
 }
