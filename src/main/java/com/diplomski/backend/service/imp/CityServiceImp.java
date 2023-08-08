@@ -21,4 +21,13 @@ public class CityServiceImp implements CityService {
         }
         return optionalCity.get();
     }
+
+    @Override
+    public City findByName(String name) throws NoSuchElementFoundException {
+        Optional<City> optionalCity=cityRepository.findByName(name);
+        if(!optionalCity.isPresent()){
+            throw new NoSuchElementFoundException("City with name "+name+" does not exist");
+        }
+        return optionalCity.get();
+    }
 }

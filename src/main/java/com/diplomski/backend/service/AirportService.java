@@ -7,4 +7,5 @@ import org.springframework.data.domain.Page;
 public interface AirportService {
     public Airport findByIataCode(Airport airport) throws NoSuchElementFoundException;
     public Page<Airport> getAll(int pageNo);
+    public boolean existByCityName(String name);
 }

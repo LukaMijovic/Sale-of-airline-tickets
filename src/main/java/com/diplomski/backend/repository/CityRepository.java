@@ -12,4 +12,6 @@ public interface CityRepository extends JpaRepository<City,Long> {
     Optional<City> findByIataCode(String iataCode);
 
     Optional<Country> findByCountryIso2Code(String iso2Code);
+
+    Optional<City> findByName(String name);
 }
