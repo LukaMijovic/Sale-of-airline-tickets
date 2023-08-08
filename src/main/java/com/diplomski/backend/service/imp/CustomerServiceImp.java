@@ -3,12 +3,14 @@ package com.diplomski.backend.service.imp;
 import com.diplomski.backend.domain.Customer;
 import com.diplomski.backend.domain.enumeration.AccountStatus;
 import com.diplomski.backend.domain.enumeration.Role;
+import com.diplomski.backend.exception.BadRequestAirportException;
 import com.diplomski.backend.repository.CustomerRepository;
 import com.diplomski.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
@@ -20,5 +22,14 @@ public class CustomerServiceImp implements CustomerService {
         customer.setRole(Role.CUSTOMER);
         customer.setRegistrationTime(LocalDateTime.now());
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public Customer login(Customer customer) throws BadRequestAirportException {
+        Optional<Customer> optionalCustomer=customerRepository.findByEmailAndPassword(customer.getEmail(),customer.getPassword());
+        if(!optionalCustomer.isPresent()){
+            throw new BadRequestAirportException("Email or password is not correct");
+        }
+        return optionalCustomer.get();
     }
 }

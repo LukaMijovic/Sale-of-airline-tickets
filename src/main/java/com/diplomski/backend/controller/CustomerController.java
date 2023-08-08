@@ -3,6 +3,7 @@ package com.diplomski.backend.controller;
 import com.diplomski.backend.domain.Customer;
 import com.diplomski.backend.dto.CustomerDTO;
 import com.diplomski.backend.dto.mapper.CustomerMapper;
+import com.diplomski.backend.dto.request.CustomerLogin;
 import com.diplomski.backend.dto.request.CustomerRegistration;
 import com.diplomski.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,12 @@ public class CustomerController {
         customer.setCity(customerRegistration.city());
         customer.setCounty(customerRegistration.country());
         return customerMapper.entityToDTO(customerService.registration(customer));
+    }
+    @PostMapping("/v1/login")
+    public CustomerDTO login(@RequestBody CustomerLogin customerLogin){
+        Customer customer=new Customer();
+        customer.setEmail(customerLogin.email());
+        customer.setPassword(customerLogin.password());
+        return customerMapper.entityToDTO(customerService.login(customer));
     }
 }
