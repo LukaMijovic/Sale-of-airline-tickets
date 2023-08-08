@@ -23,4 +23,12 @@ public class FlightController {
     public Page<FlightDTO> getFlights(@PathVariable int pageNo){
         return flightMapper.entitiesToDTOs(flightService.getAllFlights(pageNo));
     }
+    @GetMapping("v1/get-all/active/{pageNo}")
+    public Page<FlightDTO> getActiveFlights(@PathVariable int pageNo){
+        return flightMapper.entitiesToDTOs(flightService.getActiveFlights(pageNo));
+    }
+    @GetMapping("v1/get-all/scheduled/{pageNo}")
+    public Page<FlightDTO> getScheduledFlights(@PathVariable int pageNo){
+        return flightMapper.entitiesToDTOs(flightService.getScheduledFlights(pageNo));
+    }
 }

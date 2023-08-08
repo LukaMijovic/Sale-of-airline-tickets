@@ -1,6 +1,7 @@
 package com.diplomski.backend.service.imp;
 
 import com.diplomski.backend.domain.Flight;
+import com.diplomski.backend.domain.enumeration.FlightStatus;
 import com.diplomski.backend.exception.NoSuchElementFoundException;
 import com.diplomski.backend.repository.FlightRepository;
 import com.diplomski.backend.service.FlightService;
@@ -30,5 +31,17 @@ public class FlightServiceImp implements FlightService {
     public Page<Flight> getAllFlights(int pageNo) {
         Pageable pageable= PageRequest.of(pageNo,10);
         return flightRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Flight> getActiveFlights(int pageNo) {
+        Pageable pageable=PageRequest.of(pageNo,10);
+        return flightRepository.findByFlightStatus(FlightStatus.ACTIVE,pageable);
+    }
+
+    @Override
+    public Page<Flight> getScheduledFlights(int pageNo) {
+        Pageable pageable=PageRequest.of(pageNo,10);
+        return flightRepository.findByFlightStatus(FlightStatus.SCHEDULED,pageable);
     }
 }
