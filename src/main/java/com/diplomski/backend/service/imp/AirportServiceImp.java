@@ -31,4 +31,9 @@ public class AirportServiceImp implements AirportService {
         Pageable pageable= PageRequest.of(pageNo,10);
         return airportRepository.findAll(pageable);
     }
+
+    @Override
+    public boolean existByCityName(String name) {
+        return airportRepository.existsByCityName(name);
+    }
 }
