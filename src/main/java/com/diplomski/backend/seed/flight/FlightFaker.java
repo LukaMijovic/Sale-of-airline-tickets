@@ -52,6 +52,9 @@ public class FlightFaker {
             }
             flight.setDepScheduled(LocalDateTime.of(flight.getFlightDate(),route.getDepartureTime()));
             flight.setDepEstimated(LocalDateTime.of(flight.getFlightDate(),route.getDepartureTime()));
+
+            flight.setArrScheduled(LocalDateTime.of(flight.getFlightDate(),route.getArrivalTime()));
+            flight.setArrEstimated(LocalDateTime.of(flight.getFlightDate(),route.getArrivalTime()));
             if(flight.getFlightStatus()==FlightStatus.ARRIVED){
                 flight.setDepEstimated(LocalDateTime.of(flight.getFlightDate(),route.getDepartureTime()));
             }

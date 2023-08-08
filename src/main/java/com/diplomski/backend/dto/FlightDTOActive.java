@@ -5,24 +5,22 @@ import com.diplomski.backend.domain.enumeration.FlightStatus;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record FlightDTO(
+public record FlightDTOActive(
         Long id,
         LocalDate flightDate,
         FlightStatus flightStatus,
         String departureGate,
-        Integer departureDelay,
         LocalDateTime departureScheduled,
         LocalDateTime departureEstimated,
-        LocalDateTime departureActual,
         String arrivalGate,
-        Integer arrivalDelay,
         LocalDateTime arrivalScheduled,
         LocalDateTime arrivalEstimated,
-        LocalDateTime arrivalActual,
         String baggage,
         LocalDateTime updateFlight,
-        AirplaneDTO airplaneDTO,
-        RouteDTO routeDTO
-
+        String registrationNumber,
+        String airlineName,
+        String airlineImage,
+        String airportName,
+        String airportCity
 ) {
 }
