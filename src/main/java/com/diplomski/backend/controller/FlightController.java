@@ -2,6 +2,8 @@ package com.diplomski.backend.controller;
 
 import com.diplomski.backend.domain.Flight;
 import com.diplomski.backend.dto.FlightDTO;
+import com.diplomski.backend.dto.FlightDTOActive;
+import com.diplomski.backend.dto.mapper.FlightActiveMapper;
 import com.diplomski.backend.dto.mapper.FlightMapper;
 import com.diplomski.backend.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +20,19 @@ public class FlightController {
     private FlightService flightService;
     @Autowired
     private FlightMapper flightMapper;
+    @Autowired
+    private FlightActiveMapper flightActiveMapper;
 
     @GetMapping("v1/get-all/{pageNo}")
     public Page<FlightDTO> getFlights(@PathVariable int pageNo){
         return flightMapper.entitiesToDTOs(flightService.getAllFlights(pageNo));
     }
     @GetMapping("v1/get-all/active/{pageNo}")
-    public Page<FlightDTO> getActiveFlights(@PathVariable int pageNo){
-        return flightMapper.entitiesToDTOs(flightService.getActiveFlights(pageNo));
+    public Page<FlightDTOActive> getActiveFlights(@PathVariable int pageNo){
+        return flightActiveMapper.entitiesToDTOs(flightService.getActiveFlights(pageNo));
     }
     @GetMapping("v1/get-all/scheduled/{pageNo}")
-    public Page<FlightDTO> getScheduledFlights(@PathVariable int pageNo){
-        return flightMapper.entitiesToDTOs(flightService.getScheduledFlights(pageNo));
+    public Page<FlightDTOActive> getScheduledFlights(@PathVariable int pageNo){
+        return flightActiveMapper.entitiesToDTOs(flightService.getScheduledFlights(pageNo));
     }
 }

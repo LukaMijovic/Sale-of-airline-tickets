@@ -20,7 +20,9 @@ public record FlightDTOActive(
         String registrationNumber,
         String airlineName,
         String airlineImage,
-        String airportName,
-        String airportCity
+        String airportNameDep,
+        String airportCityDep,
+        String airportNameArr,
+        String airportCityArr
 ) {
 }
