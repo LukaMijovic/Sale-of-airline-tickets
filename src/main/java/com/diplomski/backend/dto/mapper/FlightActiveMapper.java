@@ -23,9 +23,9 @@ public class FlightActiveMapper implements Mapper<Flight, FlightDTOActive> {
                 entity.getAirplane().getRegistrationNumber(),
                 entity.getRoute().getAirline().getName(),
                 entity.getRoute().getAirline().getImage(),
-                entity.getRoute().getDepartureAirport().getName(),
+                entity.getRoute().getDepartureAirport().getIataCode(),
                 entity.getRoute().getDepartureAirport().getCity().getName(),
-                entity.getRoute().getArrivalAirport().getName(),
+                entity.getRoute().getArrivalAirport().getIataCode(),
                 entity.getRoute().getArrivalAirport().getCity().getName()
         );
     }
