@@ -4,6 +4,8 @@ import com.diplomski.backend.domain.Flight;
 import com.diplomski.backend.dto.FlightDTOActive2;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
+
 @Component
 public class FlightActive2Mapper implements Mapper<Flight, FlightDTOActive2> {
     @Override
@@ -11,8 +13,8 @@ public class FlightActive2Mapper implements Mapper<Flight, FlightDTOActive2> {
         return new FlightDTOActive2(
                 entity.getId(),
                 entity.getFlightDate(),
-                entity.getDepScheduled(),
-                entity.getArrScheduled(),
+                entity.getDepScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),
+                entity.getArrScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),
                 entity.getRoute().getAirline().getName(),
                 entity.getRoute().getAirline().getImage(),
                 entity.getRoute().getDepartureAirport().getIataCode(),

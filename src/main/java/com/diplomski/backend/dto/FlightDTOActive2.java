@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public record FlightDTOActive2(
         Long id,
         LocalDate flightDate,
-        LocalDateTime departureScheduled,
-        LocalDateTime arrivalScheduled,
+        String departureScheduled,
+        String arrivalScheduled,
         String airlineName,
         String airlineImage,
         String iataCodeDep,
