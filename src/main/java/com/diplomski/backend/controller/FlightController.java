@@ -3,6 +3,8 @@ package com.diplomski.backend.controller;
 import com.diplomski.backend.domain.Flight;
 import com.diplomski.backend.dto.FlightDTO;
 import com.diplomski.backend.dto.FlightDTOActive;
+import com.diplomski.backend.dto.FlightDTOActive2;
+import com.diplomski.backend.dto.mapper.FlightActive2Mapper;
 import com.diplomski.backend.dto.mapper.FlightActiveMapper;
 import com.diplomski.backend.dto.mapper.FlightMapper;
 import com.diplomski.backend.dto.request.FlightRequest;
@@ -20,6 +22,8 @@ public class FlightController {
     private FlightMapper flightMapper;
     @Autowired
     private FlightActiveMapper flightActiveMapper;
+    @Autowired
+    private FlightActive2Mapper flightActive2Mapper;
 
     @GetMapping("v1/get-all/{pageNo}")
     public Page<FlightDTO> getFlights(@PathVariable int pageNo){
@@ -35,6 +39,12 @@ public class FlightController {
     }
     @PostMapping("v1/get/scheduled/{pageNo}")
     public Page<FlightDTOActive> getRequestFlights(@RequestBody FlightRequest flightRequest, @PathVariable int pageNo){
-        return flightActiveMapper.entitiesToDTOs(flightService.findActiveFlights(flightRequest,pageNo));
+        Page<FlightDTOActive> flights = flightActiveMapper.entitiesToDTOs(flightService.findActiveFlights(flightRequest,pageNo));
+        System.out.println(flights.get().count());
+        return flights;
+    }
+    @PostMapping("v2/get/scheduled/{pageNo}")
+    public Page<FlightDTOActive2> getRequestFlights2(@RequestBody FlightRequest flightRequest, @PathVariable int pageNo){
+        return flightActive2Mapper.entitiesToDTOs(flightService.findActiveFlights(flightRequest,pageNo));
     }
 }
