@@ -17,6 +17,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -30,8 +32,8 @@ public class FlightServiceImp implements FlightService {
 
     @Override
     public Flight findByFlightNumber(Flight flight) throws NoSuchElementFoundException {
-        Optional<Flight> optionalFlight=flightRepository.findByRouteFlight(flight.getRoute().getFlight());
-        if(!optionalFlight.isPresent()){
+        Optional<Flight> optionalFlight = flightRepository.findByRouteFlight(flight.getRoute().getFlight());
+        if (!optionalFlight.isPresent()) {
             throw new NoSuchElementFoundException("Flight with this route does not exist");
         }
         return optionalFlight.get();
@@ -39,56 +41,79 @@ public class FlightServiceImp implements FlightService {
 
     @Override
     public Page<Flight> getAllFlights(int pageNo) {
-        Pageable pageable= PageRequest.of(pageNo,10);
+        Pageable pageable = PageRequest.of(pageNo, 10);
         return flightRepository.findAll(pageable);
     }
 
     @Override
     public Page<Flight> getActiveFlights(int pageNo) {
-        Pageable pageable=PageRequest.of(pageNo,10);
-        return flightRepository.findByFlightStatus(FlightStatus.ACTIVE,pageable);
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return flightRepository.findByFlightStatus(FlightStatus.ACTIVE, pageable);
     }
 
     @Override
     public Page<Flight> getScheduledFlights(int pageNo) {
-        Pageable pageable=PageRequest.of(pageNo,10);
-        return flightRepository.findByFlightStatus(FlightStatus.SCHEDULED,pageable);
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return flightRepository.findByFlightStatus(FlightStatus.SCHEDULED, pageable);
     }
 
     @Override
     public Page<Flight> findActiveFlights(FlightRequest flightRequest, int pageNo) throws BadRequestAirportException {
-        Pageable pageable=PageRequest.of(pageNo,10);
+        Pageable pageable = PageRequest.of(pageNo, 10);
         City cityDep;
         City cityArr;
-        try{
-            cityDep=cityService.findByName(flightRequest.cityDep());
-        }catch (NoSuchElementFoundException ex){
+        try {
+            cityDep = cityService.findByName(flightRequest.cityDep());
+        } catch (NoSuchElementFoundException ex) {
             throw new BadRequestAirportException("The departure city does not exist in database");
         }
-        try{
-            cityArr=cityService.findByName(flightRequest.cityDep());
-        }catch (NoSuchElementFoundException ex){
+        try {
+            cityArr = cityService.findByName(flightRequest.cityDep());
+        } catch (NoSuchElementFoundException ex) {
             throw new BadRequestAirportException("The arrival city does not exist in database");
         }
 
-        if (!airportService.existByCityName(flightRequest.cityDep())){
+        if (!airportService.existByCityName(flightRequest.cityDep())) {
             throw new BadRequestAirportException("The departure city does not have airport");
         }
-        if(!airportService.existByCityName(flightRequest.cityArr())){
+        if (!airportService.existByCityName(flightRequest.cityArr())) {
             throw new BadRequestAirportException("The arrival city does not have airport");
         }
-        if(flightRequest.timeTravel()==null){
+        if (flightRequest.timeTravel() == null) {
             return flightRepository.findByRouteDepartureAirportCityNameAndRouteArrivalAirportCityName(
                     flightRequest.cityDep(),
                     flightRequest.cityArr(),
                     pageable
             );
         }
+        LocalDate dateTravel = generateDate(flightRequest.timeTravel());
+
         return flightRepository.findByRouteDepartureAirportCityNameAndRouteArrivalAirportCityNameAndFlightDate(
                 flightRequest.cityDep(),
                 flightRequest.cityArr(),
-                flightRequest.timeTravel(),
+                dateTravel,
                 pageable
         );
+    }
+
+    private LocalDate generateDate(String timeTravel) throws BadRequestAirportException {
+        String[] dates = timeTravel.split("/");
+        int day, month, year;
+        try {
+            day = Integer.parseInt(dates[0]);
+        } catch (Exception ex) {
+            throw new BadRequestAirportException("Day can not parse to integer!");
+        }
+        try {
+            month = Integer.parseInt(dates[1]);
+        } catch (Exception ex) {
+            throw new BadRequestAirportException("Month can not parse to integer!");
+        }
+        try {
+            year = Integer.parseInt(dates[2]);
+        } catch (Exception ex) {
+            throw new BadRequestAirportException("Year can not parse to integer!");
+        }
+        return LocalDate.of(year, month, day);
     }
 }
