@@ -22,9 +22,6 @@ public class PriceList {
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
-    @ManyToOne
-    @JoinColumn(name = "airplane_id")
-    private Airplane airplane;
     @Column(name = "first_class_price")
     private BigDecimal firstClassPrice;
     @Column(name = "business_class_price")

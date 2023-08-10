@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -72,5 +73,7 @@ public class Route {
     private LocalDateTime updatedDate;
     @OneToMany(cascade ={CascadeType.MERGE,CascadeType.REMOVE},mappedBy = "route")
     private Set<Flight> flights;
+    @OneToMany(mappedBy = "route")
+    private List<PriceList> priceLists;
 
 }
