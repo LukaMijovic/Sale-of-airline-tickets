@@ -15,4 +15,5 @@ public interface AirplaneService {
     List<Airplane> findAllByAirline(Airline airline);
     List<Airplane> findAll();
     List<Seat> findAllSeats(Long id) throws EntityNotFoundException;
+    List<Seat> findAllOpenedSeats(Long id) throws EntityNotFoundException;
 }
