@@ -15,7 +15,7 @@ public class PriceListController {
     @Autowired
     private PriceListMapper priceListMapper;
 
-    @GetMapping("/v1/flight/{id}")
+    @GetMapping("v1/flight/{id}")
     public PriceListDTO getPriceListByFlightId(@PathVariable Long id){
         return priceListMapper.entityToDTO(priceListService.findByFlightId(id));
     }
