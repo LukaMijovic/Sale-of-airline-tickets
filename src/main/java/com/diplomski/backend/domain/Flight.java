@@ -97,4 +97,6 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
+    @OneToMany(mappedBy = "flight")
+    private List<Booking> bookings;
 }

@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -57,5 +58,7 @@ public class Customer extends User {
     private LocalDateTime loginTime;
     @Transient
     private LocalDateTime logoutTime;
+    @OneToMany(mappedBy = "customer")
+    List<Booking> bookings;
 
 }

@@ -1,6 +1,6 @@
 package com.diplomski.backend.domain;
 
-import com.diplomski.backend.domain.enumeration.SeatStatusEnum;
+import com.diplomski.backend.domain.enumeration.ReservationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,24 +12,26 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "seat_status")
+@Table(name = "booking")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SeatStatus {
+public class Booking {
     @Id
     @GeneratedValue
     private Long id;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "seat_status_state")
-    private SeatStatusEnum seatStatus;
-    private LocalDateTime updated;
+    @Column(name = "creation_time")
+    private LocalDateTime creationTime;
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
+    private ReservationStatus status;
+    private String currency;
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
     @ManyToOne
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
-    @OneToMany(mappedBy = "seatStatus")
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+    @OneToMany(mappedBy = "booking")
     private List<Ticket> tickets;
 }
