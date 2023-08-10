@@ -4,6 +4,7 @@ import com.diplomski.backend.domain.enumeration.ReservationStatus;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record BookingDTO(
         Long id,
@@ -13,6 +14,6 @@ public record BookingDTO(
         ReservationStatus status,
         Long customerId,
         Long flightId,
-        TicketDTO ticket
+        List<TicketDTO> tickets
 ) {
 }
