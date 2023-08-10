@@ -2,8 +2,10 @@ package com.diplomski.backend.seed;
 
 import com.diplomski.backend.domain.*;
 import com.diplomski.backend.repository.FlightRepository;
+import com.diplomski.backend.repository.PriceListRepository;
 import com.diplomski.backend.repository.SeatRepository;
 import com.diplomski.backend.seed.flight.FlightFaker;
+import com.diplomski.backend.seed.pricelist.PricelistFaker;
 import com.diplomski.backend.seed.seat.SeatFaker;
 import com.diplomski.backend.service.AirlineService;
 import com.diplomski.backend.service.AirplaneService;
@@ -18,6 +20,7 @@ import java.util.List;
 public class MyFakerServis {
     private FlightFaker flightFaker;
     private SeatFaker seatFaker;
+    private PricelistFaker pricelistFaker;
     @Autowired
     private RouteService routeService;
     @Autowired
@@ -26,6 +29,8 @@ public class MyFakerServis {
     private AirplaneService airplaneService;
     @Autowired
     private SeatRepository seatRepository;
+    @Autowired
+    private PriceListRepository priceListRepository;
 
     public void initFlights(){
         List<Route> routes=routeService.findAll().stream().toList();
@@ -53,5 +58,10 @@ public class MyFakerServis {
            // System.out.println(1);
             seatRepository.saveAll(seats);
         }
+    }
+    public void initPriceList(){
+        pricelistFaker=new PricelistFaker();
+        List<PriceList> priceLists=pricelistFaker.init();
+        priceListRepository.saveAll(priceLists);
     }
 }

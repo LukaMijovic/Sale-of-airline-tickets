@@ -3,6 +3,7 @@ package com.diplomski.backend.service.imp;
 import com.diplomski.backend.domain.Airport;
 import com.diplomski.backend.domain.City;
 import com.diplomski.backend.domain.Flight;
+import com.diplomski.backend.domain.Route;
 import com.diplomski.backend.domain.enumeration.FlightStatus;
 import com.diplomski.backend.dto.request.FlightRequest;
 import com.diplomski.backend.exception.BadRequestAirportException;
@@ -103,6 +104,12 @@ public class FlightServiceImp implements FlightService {
             throw new NoSuchElementFoundException("Flight with id "+id+" does not exist");
         }
         return optionalFlight.get();
+    }
+
+    @Override
+    public Route findRouteByFlightId(Long id) throws NoSuchElementFoundException {
+        //Optional<Route> optionalRoute=flightRepository.findBy
+        return null;
     }
 
     private LocalDate generateDate(String timeTravel) throws BadRequestAirportException {
