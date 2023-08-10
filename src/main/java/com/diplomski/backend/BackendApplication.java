@@ -1,6 +1,8 @@
 package com.diplomski.backend;
 
+import com.diplomski.backend.repository.FlightRepository;
 import com.diplomski.backend.seed.MyFakerServis;
+import com.diplomski.backend.utility.FlightRegulator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,8 @@ public class BackendApplication {
 
 	@Autowired
 	private MyFakerServis myFakerServis;
+	@Autowired
+	private FlightRegulator flightRegulator;
 	@Value("${myapp.seed.flight}")
 	private boolean flightSeed;
 	@Value("${myapp.seed.seat}")
@@ -33,6 +37,6 @@ public class BackendApplication {
 		}
 		if(priceListSeed)
 			myFakerServis.initPriceList();
-
+		flightRegulator.regulate();
 	}
 }
