@@ -1,6 +1,7 @@
 package com.diplomski.backend.service;
 
 import com.diplomski.backend.domain.Flight;
+import com.diplomski.backend.domain.Route;
 import com.diplomski.backend.dto.request.FlightRequest;
 import com.diplomski.backend.exception.BadRequestAirportException;
 import com.diplomski.backend.exception.NoSuchElementFoundException;
@@ -17,4 +18,5 @@ public interface FlightService {
     public Page<Flight> findActiveFlights(FlightRequest flightRequest,int pageNo) throws BadRequestAirportException;
 
     public Flight findFlightById(Long id) throws NoSuchElementFoundException;
+    public Route findRouteByFlightId(Long id) throws NoSuchElementFoundException;
 }
