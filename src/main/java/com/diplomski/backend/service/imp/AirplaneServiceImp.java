@@ -45,4 +45,9 @@ public class AirplaneServiceImp implements AirplaneService {
         }
         return optionalAirplane.get().getSeats();
     }
+
+    @Override
+    public List<Seat> findAllOpenedSeats(Long id) throws EntityNotFoundException {
+        return null;
+    }
 }
