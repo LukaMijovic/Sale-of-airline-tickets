@@ -47,4 +47,8 @@ public class FlightController {
     public Page<FlightDTOActive2> getRequestFlights2(@RequestBody FlightRequest flightRequest, @PathVariable int pageNo){
         return flightActive2Mapper.entitiesToDTOs(flightService.findActiveFlights(flightRequest,pageNo));
     }
+    @GetMapping("v1/get/{id}/scheduled")
+    public FlightDTOActive2 getFlightById(@PathVariable Long id){
+        return flightActive2Mapper.entityToDTO(flightService.findFlightById(id));
+    }
 }

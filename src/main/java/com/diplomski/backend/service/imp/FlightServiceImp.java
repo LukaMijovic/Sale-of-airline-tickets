@@ -96,6 +96,15 @@ public class FlightServiceImp implements FlightService {
         );
     }
 
+    @Override
+    public Flight findFlightById(Long id)throws NoSuchElementFoundException {
+        Optional<Flight> optionalFlight=flightRepository.findById(id);
+        if (!optionalFlight.isPresent()){
+            throw new NoSuchElementFoundException("Flight with id "+id+" does not exist");
+        }
+        return optionalFlight.get();
+    }
+
     private LocalDate generateDate(String timeTravel) throws BadRequestAirportException {
         String[] dates = timeTravel.split("/");
         int day, month, year;
