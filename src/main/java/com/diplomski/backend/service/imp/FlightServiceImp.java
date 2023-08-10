@@ -79,7 +79,7 @@ public class FlightServiceImp implements FlightService {
         if (!airportService.existByCityName(flightRequest.cityArr())) {
             throw new BadRequestAirportException("The arrival city does not have airport");
         }
-        if (flightRequest.timeTravel() == null) {
+        if (flightRequest.timeTravel() == null || flightRequest.timeTravel().equals("")) {
             return flightRepository.findByRouteDepartureAirportCityNameAndRouteArrivalAirportCityName(
                     flightRequest.cityDep(),
                     flightRequest.cityArr(),
