@@ -8,6 +8,8 @@ import com.diplomski.backend.service.SeatStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class SeatStatusServiceImp implements SeatStatusService {
     @Autowired
@@ -18,6 +20,7 @@ public class SeatStatusServiceImp implements SeatStatusService {
     public SeatStatus reserveSeat(SeatStatus seatStatus) {
         seatService.changeOpened(seatStatus.getSeat(),false);
         seatStatus.setSeatStatus(SeatStatusEnum.RESERVED);
+        seatStatus.setUpdated(LocalDateTime.now());
         return seatStatusRepository.save(seatStatus);
     }
 }
