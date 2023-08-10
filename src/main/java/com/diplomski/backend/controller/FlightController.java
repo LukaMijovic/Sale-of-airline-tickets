@@ -12,7 +12,7 @@ import com.diplomski.backend.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 @RequestMapping("/api/flight")
 public class FlightController {
@@ -46,5 +46,9 @@ public class FlightController {
     @PostMapping("v2/get/scheduled/{pageNo}")
     public Page<FlightDTOActive2> getRequestFlights2(@RequestBody FlightRequest flightRequest, @PathVariable int pageNo){
         return flightActive2Mapper.entitiesToDTOs(flightService.findActiveFlights(flightRequest,pageNo));
+    }
+    @GetMapping("v1/get/{id}/scheduled")
+    public FlightDTOActive2 getFlightById(@PathVariable Long id){
+        return flightActive2Mapper.entityToDTO(flightService.findFlightById(id));
     }
 }

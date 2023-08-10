@@ -8,7 +8,7 @@ import com.diplomski.backend.dto.request.CustomerRegistration;
 import com.diplomski.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {

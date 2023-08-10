@@ -15,4 +15,6 @@ public interface FlightService {
 
     public Page<Flight> getScheduledFlights(int pageNo);
     public Page<Flight> findActiveFlights(FlightRequest flightRequest,int pageNo) throws BadRequestAirportException;
+
+    public Flight findFlightById(Long id) throws NoSuchElementFoundException;
 }
