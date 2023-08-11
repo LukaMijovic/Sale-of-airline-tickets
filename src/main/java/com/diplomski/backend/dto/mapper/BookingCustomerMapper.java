@@ -11,6 +11,7 @@ public class BookingCustomerMapper implements Mapper<Booking, BookingCustomerDTO
     @Override
     public BookingCustomerDTO entityToDTO(Booking entity) {
         return new BookingCustomerDTO(
+                entity.getId(),
                 entity.getFlight().getFlightDate(),
                 entity.getFlight().getDepScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),
                 entity.getFlight().getArrScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),
