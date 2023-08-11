@@ -35,6 +35,10 @@ public class BookingServiceImp implements BookingService {
     public Booking createBooking(BookingRequest bookingRequest) throws NoSuchElementFoundException {
         Customer customer= customerService.findById(bookingRequest.customerId());
         Flight flight=flightService.findFlightById(bookingRequest.flightId());
+        List<Seat> seats=airplaneService.findAllSeats(flight.getAirplane().getId());
+        Seat seat=findFirstEmptySeat(bookingRequest.seatClass(),seats);
+        System.out.println(seat.getId());
+
         Booking booking=new Booking();
         booking.setFlight(flight);
         booking.setCustomer(customer);
@@ -42,22 +46,29 @@ public class BookingServiceImp implements BookingService {
         booking.setCurrency("$");
         booking.setStatus(ReservationStatus.REQUESTED);
         Booking bookingSaved=bookingRepository.save(booking);
-        List<Seat> seats=airplaneService.findAllSeats(flight.getAirplane().getId());
-        Seat seat=findFirstEmptySeat(bookingRequest.seatClass(),seats);
-        System.out.println(seat.getId());
+
         SeatStatus seatStatusPom=new SeatStatus();
         seatStatusPom.setSeat(seat);
         seatStatusPom.setFlight(flight);
         SeatStatus seatStatus=seatStatusService.reserveSeat(seatStatusPom);
         PriceList priceList=priceListService.findByFlightId(bookingRequest.flightId());
+
         Ticket ticket=new Ticket();
         ticket.setCode(String.valueOf(customer.getId()+seat.getCode()+ flight.getId()));
         ticket.setAmount(getPrice(seat.getSeatClass(),priceList));
         ticket.setSeatStatus(seatStatus);
         ticket.setBooking(bookingSaved);
+
         ticketService.saveTicket(ticket);
         return bookingSaved;
     }
+
+    @Override
+    public List<Booking> getBookingsByCustomer(Long id) throws NoSuchElementFoundException {
+        Customer customer=customerService.findById(id);
+        return customer.getBookings();
+    }
+
     private Seat findFirstEmptySeat(String seatClassPom,List<Seat> seats) throws NoSuchElementFoundException{
         for(Seat seat:seats){
             SeatClass seatClass=SeatClass.valueOf(seatClassPom);

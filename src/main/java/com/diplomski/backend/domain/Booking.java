@@ -24,6 +24,7 @@ public class Booking {
     private LocalDateTime creationTime;
     @Column(name = "end_time")
     private LocalDateTime endTime;
+    @Enumerated(EnumType.STRING)
     private ReservationStatus status;
     private String currency;
     @ManyToOne
