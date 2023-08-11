@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +81,20 @@ public class BookingServiceImp implements BookingService {
         booking.setStatus(ReservationStatus.CANCELED);
         seatStatusService.cancelReservationSeat(booking.getTickets().get(0).getSeatStatus());
         return bookingRepository.save(booking);
+    }
+
+    @Override
+    public List<Booking> getBookingRequestByCustomer(Long id) throws NoSuchElementFoundException {
+    Customer customer=customerService.findById(id);
+//        List<Booking> bookings=customer.getBookings();
+//        List<Booking> bookingsRequested=new ArrayList<>();
+//        for(Booking booking:bookings){
+//            if(booking.getStatus()==ReservationStatus.REQUESTED){
+//                bookingsRequested.add(booking);
+//            }
+//        }
+//        return bookingsRequested;
+        return bookingRepository.findAllByStatusAndCustomerId(ReservationStatus.REQUESTED,customer.getId());
     }
 
     private Seat findFirstEmptySeat(String seatClassPom,List<Seat> seats) throws NoSuchElementFoundException{

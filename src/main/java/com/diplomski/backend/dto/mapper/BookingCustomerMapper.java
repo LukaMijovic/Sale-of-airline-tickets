@@ -12,6 +12,7 @@ public class BookingCustomerMapper implements Mapper<Booking, BookingCustomerDTO
     public BookingCustomerDTO entityToDTO(Booking entity) {
         return new BookingCustomerDTO(
                 entity.getId(),
+                entity.getStatus().toString(),
                 entity.getFlight().getFlightDate(),
                 entity.getFlight().getDepScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),
                 entity.getFlight().getArrScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),

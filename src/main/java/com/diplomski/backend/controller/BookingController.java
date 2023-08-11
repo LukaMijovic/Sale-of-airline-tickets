@@ -43,6 +43,10 @@ public class BookingController {
     public List<BookingCustomerDTO> getBookingsDTOByCustomer(@PathVariable Long customerId){
         return bookingCustomerMapper.entitiesToDTOs(bookingService.getBookingsByCustomer(customerId));
     }
+    @GetMapping("/v2/get-all/requested/{customerId}")
+    public List<BookingCustomerDTO> getBookingsDTORequestedByCustomer(@PathVariable Long customerId){
+        return bookingCustomerMapper.entitiesToDTOs(bookingService.getBookingRequestByCustomer(customerId));
+    }
     @PutMapping("/v1/cancel/{bookingId}")
     public BookingResponse cancelBooking(@PathVariable Long bookingId){
         try{
