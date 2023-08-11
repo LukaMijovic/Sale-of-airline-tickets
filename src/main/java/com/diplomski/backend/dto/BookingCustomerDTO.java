@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public record BookingCustomerDTO(
         Long id,
-        String status,
         LocalDate flightDate,
         String departureScheduled,
         String arrivalScheduled,
