@@ -97,6 +97,21 @@ public class BookingServiceImp implements BookingService {
         return bookingRepository.findAllByStatusAndCustomerId(ReservationStatus.REQUESTED,customer.getId());
     }
 
+    @Override
+    public Booking payBooking(Long id) throws NoSuchElementFoundException {
+        Optional<Booking> optionalBooking =bookingRepository.findById(id);
+        if(!optionalBooking.isPresent()){
+            throw new NoSuchElementFoundException("The booking with id "+id+" does not exist!");
+        }
+        Booking booking=optionalBooking.get();
+        if(booking.getStatus()==ReservationStatus.CANCELED){
+            throw new NoSuchElementFoundException("You can not pay for canceled booking");
+        }
+        booking.setStatus(ReservationStatus.CONFIRMED);
+        seatStatusService.payReservationSeat(booking.getTickets().get(0).getSeatStatus());
+        return bookingRepository.save(booking);
+    }
+
     private Seat findFirstEmptySeat(String seatClassPom,List<Seat> seats) throws NoSuchElementFoundException{
         for(Seat seat:seats){
             SeatClass seatClass=SeatClass.valueOf(seatClassPom);

@@ -56,4 +56,13 @@ public class BookingController {
             return new BookingResponse(-1L,false);
         }
     }
+    @PutMapping("/v1/pay/{bookingId}")
+    public BookingResponse payBooking(@PathVariable Long bookingId){
+        try{
+            Booking booking=bookingService.payBooking(bookingId);
+            return new BookingResponse(booking.getId(),true);
+        }catch (NoSuchElementFoundException ex){
+            return new BookingResponse(-1L,false);
+        }
+    }
 }

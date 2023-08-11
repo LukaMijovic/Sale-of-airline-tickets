@@ -6,4 +6,5 @@ public interface SeatStatusService {
     public SeatStatus reserveSeat(SeatStatus seatStatus);
     public SeatStatus cancelReservationSeat(SeatStatus seatStatus);
     public SeatStatus changeSeatStatus(SeatStatus seatStatus);
+    public SeatStatus payReservationSeat(SeatStatus seatStatus);
 }

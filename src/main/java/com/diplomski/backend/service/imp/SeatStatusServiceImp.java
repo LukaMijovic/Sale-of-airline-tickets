@@ -47,4 +47,11 @@ public class SeatStatusServiceImp implements SeatStatusService {
     public SeatStatus changeSeatStatus(SeatStatus seatStatus) {
         return null;
     }
+
+    @Override
+    public SeatStatus payReservationSeat(SeatStatus seatStatus) {
+        seatStatus.setSeatStatus(SeatStatusEnum.PAID);
+        seatStatus.setUpdated(LocalDateTime.now());
+        return seatStatusRepository.save(seatStatus);
+    }
 }
