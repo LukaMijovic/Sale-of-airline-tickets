@@ -62,6 +62,13 @@ public class BookingServiceImp implements BookingService {
         ticketService.saveTicket(ticket);
         return bookingSaved;
     }
+
+    @Override
+    public List<Booking> getBookingsByCustomer(Long id) throws NoSuchElementFoundException {
+        Customer customer=customerService.findById(id);
+        return customer.getBookings();
+    }
+
     private Seat findFirstEmptySeat(String seatClassPom,List<Seat> seats) throws NoSuchElementFoundException{
         for(Seat seat:seats){
             SeatClass seatClass=SeatClass.valueOf(seatClassPom);
