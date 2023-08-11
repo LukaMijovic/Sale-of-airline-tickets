@@ -98,6 +98,12 @@ public class BookingServiceImp implements BookingService {
     }
 
     @Override
+    public List<Booking> getBookingPaidByCustomer(Long id) throws NoSuchElementFoundException {
+        Customer customer=customerService.findById(id);
+        return bookingRepository.findAllByStatusAndCustomerId(ReservationStatus.CONFIRMED, customer.getId());
+    }
+
+    @Override
     public Booking payBooking(Long id) throws NoSuchElementFoundException {
         Optional<Booking> optionalBooking =bookingRepository.findById(id);
         if(!optionalBooking.isPresent()){

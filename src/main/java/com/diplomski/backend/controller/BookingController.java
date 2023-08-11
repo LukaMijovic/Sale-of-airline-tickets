@@ -65,4 +65,8 @@ public class BookingController {
             return new BookingResponse(-1L,false);
         }
     }
+    @GetMapping("/v1/get-all/paid/{customerId}")
+    public List<BookingCustomerDTO> getBookingPaidByCustomer(@PathVariable Long customerId){
+        return bookingCustomerMapper.entitiesToDTOs(bookingService.getBookingPaidByCustomer(customerId));
+    }
 }
