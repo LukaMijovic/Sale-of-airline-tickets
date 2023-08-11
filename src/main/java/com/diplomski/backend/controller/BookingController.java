@@ -43,4 +43,13 @@ public class BookingController {
     public List<BookingCustomerDTO> getBookingsDTOByCustomer(@PathVariable Long customerId){
         return bookingCustomerMapper.entitiesToDTOs(bookingService.getBookingsByCustomer(customerId));
     }
+    @PutMapping("/v1/cancel/{bookingId}")
+    public BookingResponse cancelBooking(@PathVariable Long bookingId){
+        try{
+            Booking booking=bookingService.cancelBooking(bookingId);
+            return new BookingResponse(booking.getId(),true);
+        }catch (NoSuchElementFoundException ex){
+            return new BookingResponse(-1L,false);
+        }
+    }
 }

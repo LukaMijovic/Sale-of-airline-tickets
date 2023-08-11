@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingServiceImp implements BookingService {
@@ -67,6 +68,18 @@ public class BookingServiceImp implements BookingService {
     public List<Booking> getBookingsByCustomer(Long id) throws NoSuchElementFoundException {
         Customer customer=customerService.findById(id);
         return customer.getBookings();
+    }
+
+    @Override
+    public Booking cancelBooking(Long id) throws NoSuchElementFoundException {
+        Optional<Booking> optionalBooking =bookingRepository.findById(id);
+        if(!optionalBooking.isPresent()){
+            throw new NoSuchElementFoundException("The booking with id "+id+" does not exist!");
+        }
+        Booking booking=optionalBooking.get();
+        booking.setStatus(ReservationStatus.CANCELED);
+        seatStatusService.cancelReservationSeat(booking.getTickets().get(0).getSeatStatus());
+        return bookingRepository.save(booking);
     }
 
     private Seat findFirstEmptySeat(String seatClassPom,List<Seat> seats) throws NoSuchElementFoundException{

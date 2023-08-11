@@ -23,4 +23,17 @@ public class SeatStatusServiceImp implements SeatStatusService {
         seatStatus.setUpdated(LocalDateTime.now());
         return seatStatusRepository.save(seatStatus);
     }
+
+    @Override
+    public SeatStatus cancelReservationSeat(SeatStatus seatStatus) {
+        seatService.changeOpened(seatStatus.getSeat(),true);
+        seatStatus.setSeatStatus(SeatStatusEnum.OPENED);
+        seatStatus.setUpdated(LocalDateTime.now());
+        return seatStatusRepository.save(seatStatus);
+    }
+
+    @Override
+    public SeatStatus changeSeatStatus(SeatStatus seatStatus) {
+        return null;
+    }
 }
