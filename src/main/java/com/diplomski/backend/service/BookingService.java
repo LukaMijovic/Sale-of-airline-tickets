@@ -10,4 +10,5 @@ public interface BookingService {
     public Booking createBooking(BookingRequest bookingRequest) throws NoSuchElementFoundException;
     public List<Booking> getBookingsByCustomer(Long id) throws NoSuchElementFoundException;
     public Booking cancelBooking(Long id) throws NoSuchElementFoundException;
+    public List<Booking> getBookingRequestByCustomer(Long id) throws NoSuchElementFoundException;
 }

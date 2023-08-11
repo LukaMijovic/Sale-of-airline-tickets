@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class SeatStatusServiceImp implements SeatStatusService {
@@ -18,6 +19,16 @@ public class SeatStatusServiceImp implements SeatStatusService {
     private SeatService seatService;
     @Override
     public SeatStatus reserveSeat(SeatStatus seatStatus) {
+        Optional<SeatStatus> optionalSeatStatus=seatStatusRepository.findBySeatStatusAndFlightIdAndSeatId(SeatStatusEnum.OPENED,
+                seatStatus.getFlight().getId(),seatStatus.getSeat().getId());
+        if(optionalSeatStatus.isPresent()){
+            SeatStatus seatStatusEx=optionalSeatStatus.get();
+            System.out.println(seatStatusEx.getId());
+            seatService.changeOpened(seatStatusEx.getSeat(),false);
+            seatStatusEx.setSeatStatus(SeatStatusEnum.RESERVED);
+            seatStatusEx.setUpdated(LocalDateTime.now());
+            return seatStatusRepository.save(seatStatusEx);
+        }
         seatService.changeOpened(seatStatus.getSeat(),false);
         seatStatus.setSeatStatus(SeatStatusEnum.RESERVED);
         seatStatus.setUpdated(LocalDateTime.now());
