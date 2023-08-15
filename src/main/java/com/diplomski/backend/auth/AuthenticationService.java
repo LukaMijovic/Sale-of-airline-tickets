@@ -3,6 +3,7 @@ package com.diplomski.backend.auth;
 import com.diplomski.backend.config.JwtService;
 import com.diplomski.backend.domain.Customer;
 import com.diplomski.backend.domain.User;
+import com.diplomski.backend.dto.mapper.CustomerMapper;
 import com.diplomski.backend.dto.request.CustomerRegistration;
 import com.diplomski.backend.repository.UserRepository;
 import com.diplomski.backend.service.CustomerService;
@@ -24,7 +25,8 @@ public class AuthenticationService {
     private UserRepository userRepository;
     @Autowired
     private CustomerService customerService;
-
+    @Autowired
+    private CustomerMapper customerMapper;
     @Autowired
     private JwtService jwtService;
 
@@ -46,8 +48,10 @@ public class AuthenticationService {
     public AuthResponse login (AuthRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
+        Customer customer=customerService.findById(user.getId());
         String jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder()
+                .customerDTO(customerMapper.entityToDTO(customer))
                 .token(jwtToken)
                 .build();
     }
