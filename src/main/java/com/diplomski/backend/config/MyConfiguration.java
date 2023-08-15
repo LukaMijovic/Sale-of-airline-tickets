@@ -31,7 +31,7 @@ public class MyConfiguration {
     private UserRepository repository;
     @Bean
     public UserDetailsService userDetailsService() {
-        return email -> repository.findByEmailNew(email)
+        return email -> repository.findByEmail(email)
                 .orElseThrow(() -> new NoSuchElementFoundException("User not found"));
     }
     @Bean
