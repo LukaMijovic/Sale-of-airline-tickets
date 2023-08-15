@@ -1,6 +1,7 @@
 package com.diplomski.backend.service;
 
 import com.diplomski.backend.domain.Customer;
+import com.diplomski.backend.domain.User;
 import com.diplomski.backend.exception.BadRequestAirportException;
 import com.diplomski.backend.exception.BadRequestCustomerException;
 import com.diplomski.backend.exception.NoSuchElementFoundException;

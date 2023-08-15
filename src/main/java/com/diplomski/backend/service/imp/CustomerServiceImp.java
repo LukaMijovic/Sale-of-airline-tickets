@@ -1,6 +1,7 @@
 package com.diplomski.backend.service.imp;
 
 import com.diplomski.backend.domain.Customer;
+import com.diplomski.backend.domain.User;
 import com.diplomski.backend.domain.enumeration.AccountStatus;
 import com.diplomski.backend.domain.enumeration.Role;
 import com.diplomski.backend.exception.BadRequestAirportException;
@@ -48,4 +49,6 @@ public class CustomerServiceImp implements CustomerService {
         }
         return optionalCustomer.get();
     }
+
+
 }
