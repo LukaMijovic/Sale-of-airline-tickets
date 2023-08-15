@@ -30,6 +30,7 @@ public class AuthenticationController {
     ){
         return ResponseEntity.ok(service.login(request));
     }
+    @PostMapping("/v1/registration")
     public ResponseEntity<CustomerDTO> registration(@RequestBody CustomerRegistration customerRegistration){
         return ResponseEntity.ok(customerMapper.entityToDTO(service.registration(customerRegistration)));
     }

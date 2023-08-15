@@ -9,7 +9,7 @@ public record CustomerRegistration(
         String phone,
         String firstName,
         String lastName,
-        LocalDate birthDate,
+        String birthDate,
         String city,
         String country
 ) {

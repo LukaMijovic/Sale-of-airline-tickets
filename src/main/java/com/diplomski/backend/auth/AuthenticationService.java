@@ -11,6 +11,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Service
 public class AuthenticationService {
     @Autowired
@@ -57,7 +60,7 @@ public class AuthenticationService {
         customer.setPhone(customerRegistration.phone());
         customer.setFirstName(customerRegistration.firstName());
         customer.setLastName(customerRegistration.lastName());
-        customer.setBirthDate(customerRegistration.birthDate());
+        customer.setBirthDate(LocalDate.parse(customerRegistration.birthDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         customer.setCity(customerRegistration.city());
         customer.setCounty(customerRegistration.country());
         return customerService.registration(customer);

@@ -23,8 +23,8 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/auth/v1/login").permitAll()
-                        .requestMatchers("/api/flight/v1/get/scheduled/{pageNo}").hasAuthority("CUSTOMER")
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/flight/v2/get/scheduled/{pageNo}").hasAuthority("CUSTOMER")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
