@@ -13,8 +13,8 @@ public class FlightActive2Mapper implements Mapper<Flight, FlightDTOActive2> {
         return new FlightDTOActive2(
                 entity.getId(),
                 entity.getFlightDate(),
-                entity.getDepScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),
-                entity.getArrScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")),
+                entity.getDepScheduled()!=null?entity.getDepScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")):null,
+                entity.getArrScheduled()!=null?entity.getArrScheduled().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")):null,
                 entity.getRoute().getAirline().getName(),
                 entity.getRoute().getAirline().getImage(),
                 entity.getRoute().getDepartureAirport().getIataCode(),
