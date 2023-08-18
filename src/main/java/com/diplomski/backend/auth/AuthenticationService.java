@@ -64,7 +64,12 @@ public class AuthenticationService {
         customer.setPhone(customerRegistration.phone());
         customer.setFirstName(customerRegistration.firstName());
         customer.setLastName(customerRegistration.lastName());
-        customer.setBirthDate(LocalDate.parse(customerRegistration.birthDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        if(customerRegistration.birthDate()!=null){
+            customer.setBirthDate(LocalDate.parse(customerRegistration.birthDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        }else{
+            customer.setBirthDate(null);
+        }
+
         customer.setCity(customerRegistration.city());
         customer.setCounty(customerRegistration.country());
         return customerService.registration(customer);

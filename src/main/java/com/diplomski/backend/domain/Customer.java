@@ -39,7 +39,6 @@ public class Customer extends User {
     @NotEmpty(message = "The last name must not be a empty value")
     @Column(name = "last_name")
     private String lastName;
-    @NonNull
     @Column(name = "birth_date")
     private LocalDate birthDate;
     @NonNull
