@@ -5,6 +5,8 @@ import com.diplomski.backend.domain.Customer;
 import com.diplomski.backend.domain.User;
 import com.diplomski.backend.dto.mapper.CustomerMapper;
 import com.diplomski.backend.dto.request.CustomerRegistration;
+import com.diplomski.backend.exception.BadRequestCustomerException;
+import com.diplomski.backend.exception.NoSuchElementFoundException;
 import com.diplomski.backend.repository.UserRepository;
 import com.diplomski.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class AuthenticationService {
@@ -45,9 +49,14 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-    public AuthResponse login (AuthRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
+    public AuthResponse login (AuthRequest request) throws NoSuchElementFoundException {
+        //User user = userRepository.findByEmail(request.getEmail())
+         //       .orElseThrow();
+        Optional<User> optionalUser=userRepository.findByEmailAndPassword(request.getEmail(),request.getPassword());
+        if(!optionalUser.isPresent()){
+            throw new NoSuchElementFoundException("Email or password is not correct!");
+        }
+        User user=optionalUser.get();
         Customer customer=customerService.findById(user.getId());
         String jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder()
@@ -56,7 +65,11 @@ public class AuthenticationService {
                 .build();
     }
 
-    public Customer registration(CustomerRegistration customerRegistration) {
+    public Customer registration(CustomerRegistration customerRegistration) throws BadRequestCustomerException {
+        Optional<User> optionalUser=userRepository.findByEmail(customerRegistration.email());
+        if(optionalUser.isPresent()){
+            throw new BadRequestCustomerException("There is a user with this email!");
+        }
         Customer customer=new Customer();
         customer.setUsername(customerRegistration.username());
         customer.setEmail(customerRegistration.email());
