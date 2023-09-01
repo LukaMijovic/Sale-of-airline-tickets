@@ -8,9 +8,12 @@ import com.diplomski.backend.dto.mapper.FlightActive2Mapper;
 import com.diplomski.backend.dto.mapper.FlightActiveMapper;
 import com.diplomski.backend.dto.mapper.FlightMapper;
 import com.diplomski.backend.dto.request.FlightRequest;
+import com.diplomski.backend.exception.BadRequestAirportException;
 import com.diplomski.backend.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:8100",allowCredentials ="true")
 @RestController
@@ -44,8 +47,13 @@ public class FlightController {
         return flights;
     }
     @PostMapping("v2/get/scheduled/{pageNo}")
-    public Page<FlightDTOActive2> getRequestFlights2(@RequestBody FlightRequest flightRequest, @PathVariable int pageNo){
-        return flightActive2Mapper.entitiesToDTOs(flightService.findActiveFlights(flightRequest,pageNo));
+    public ResponseEntity<Page<FlightDTOActive2>> getRequestFlights2(@RequestBody FlightRequest flightRequest, @PathVariable int pageNo){
+        try{
+            return ResponseEntity.ok(flightActive2Mapper.entitiesToDTOs(flightService.findActiveFlights(flightRequest,pageNo)));
+        }catch (BadRequestAirportException ex){
+            return null;
+        }
+
     }
     @GetMapping("v1/get/{id}/scheduled")
     public FlightDTOActive2 getFlightById(@PathVariable Long id){
