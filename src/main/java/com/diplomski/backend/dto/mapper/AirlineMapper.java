@@ -11,16 +11,18 @@ public class AirlineMapper implements Mapper<Airline, AirlineDTO> {
     private CountryMapper countryMapper;
     @Override
     public AirlineDTO entityToDTO(Airline entity) {
-        return new AirlineDTO(entity.getId(),
+        return new AirlineDTO(
+                entity.getId(),
                 entity.getName(),
                 entity.getIataCode(),
                 entity.getIcaoCode(),
-                entity.getCallsign(),
-                entity.getActiveStatus(),
-                entity.getFleetSize(),
-                entity.getFleetAvgAge(),
-                entity.getYearFounded(),
-                countryMapper.entityToDTO(entity.getCountry()),
+               // entity.getCallsign(),
+               // entity.getActiveStatus(),
+               // entity.getFleetSize(),
+               // entity.getFleetAvgAge(),
+              //  entity.getYearFounded(),
+               // countryMapper.entityToDTO(entity.getCountry()),
+                entity.getCountry().getName(),
                 entity.getImage());
     }
 

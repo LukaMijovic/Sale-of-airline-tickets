@@ -51,4 +51,9 @@ public class AirlineServiceImp implements AirlineService {
     public List<Airplane> findAllAirplaneByAirline(Airline airline) throws NoSuchElementFoundException {
         throw new NotImplementedException("Not yet implemented...");
     }
+
+    @Override
+    public List<Airline> getAll() {
+        return airlineRepository.findAll();
+    }
 }
