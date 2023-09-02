@@ -13,15 +13,16 @@ public class AirportMapper implements Mapper<Airport, AirportDTO> {
     private CountryMapper countryMapper;
     @Override
     public AirportDTO entityToDTO(Airport entity) {
-        return new AirportDTO(entity.getId(),
+        return new AirportDTO(
+                entity.getId(),
                 entity.getName(),
                 entity.getIataCode(),
-                entity.getIcaoCode(),
-                entity.getLatitude(),
-                entity.getLongitude(),
-                entity.getPhoneNumber(),
-                countryMapper.entityToDTO(entity.getCountry()),
-                cityMapper.entityToDTO(entity.getCity())
+                entity.getIcaoCode()
+               // entity.getLatitude(),
+                //entity.getLongitude(),
+                //entity.getPhoneNumber(),
+                //countryMapper.entityToDTO(entity.getCountry()),
+                //cityMapper.entityToDTO(entity.getCity())
                 );
     }
 
