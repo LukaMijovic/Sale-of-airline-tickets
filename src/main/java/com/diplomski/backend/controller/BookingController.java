@@ -5,6 +5,7 @@ import com.diplomski.backend.dto.BookingAdmin;
 import com.diplomski.backend.dto.BookingCustomerDTO;
 import com.diplomski.backend.dto.BookingDTO;
 import com.diplomski.backend.dto.BookingResponse;
+import com.diplomski.backend.dto.mapper.BookingAdminMapper;
 import com.diplomski.backend.dto.mapper.BookingCustomerMapper;
 import com.diplomski.backend.dto.mapper.BookingMapper;
 import com.diplomski.backend.dto.request.BookingRequest;
@@ -25,6 +26,8 @@ public class BookingController {
     private BookingMapper bookingMapper;
     @Autowired
     private BookingCustomerMapper bookingCustomerMapper;
+    @Autowired
+    private BookingAdminMapper bookingAdminMapper;
 
     @PostMapping("/v1/create")
     public BookingResponse createBooking(@RequestBody BookingRequest bookingRequest){
@@ -72,6 +75,10 @@ public class BookingController {
     }
     @GetMapping("/v1/admin/get-all")
     public List<BookingAdmin> getAllBookings(){
-        return null;
+        return bookingAdminMapper.entitiesToDTOs(bookingService.getAllBookings());
+    }
+    @GetMapping("/v1/generate-ticket/{id}")
+    public boolean generateTicket(@PathVariable Long id){
+        return true;
     }
 }
