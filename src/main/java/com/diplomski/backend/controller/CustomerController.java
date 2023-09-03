@@ -8,6 +8,10 @@ import com.diplomski.backend.dto.request.CustomerRegistration;
 import com.diplomski.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @CrossOrigin(origins = "http://localhost:8100")
 @RestController
 @RequestMapping("/api/customer")
@@ -25,7 +29,7 @@ public class CustomerController {
         customer.setPhone(customerRegistration.phone());
         customer.setFirstName(customerRegistration.firstName());
         customer.setLastName(customerRegistration.lastName());
-        customer.setBirthDate(customerRegistration.birthDate());
+        customer.setBirthDate(LocalDate.parse(customerRegistration.birthDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         customer.setCity(customerRegistration.city());
         customer.setCounty(customerRegistration.country());
         return customerMapper.entityToDTO(customerService.registration(customer));

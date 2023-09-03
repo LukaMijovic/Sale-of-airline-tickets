@@ -5,10 +5,11 @@ public record AirportDTO(
         String name,
         String iataCode,
         String icaoCode,
-        Double latitude,
-        Double longitude,
-        String phoneNumber,
-        CountryDTO countryDTO,
-        CityDTO cityDTO
+        String cityCountry
+        //Double latitude,
+        //Double longitude,
+        //String phoneNumber,
+        //CountryDTO countryDTO,
+        //CityDTO cityDTO
 ) {
 }

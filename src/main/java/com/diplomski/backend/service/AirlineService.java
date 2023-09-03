@@ -12,4 +12,6 @@ public interface AirlineService {
     public boolean existIataCodeAndIcaoCode(Airline airline);
     public Airline findByIataCodeAndIcaoCode(Airline airline) throws NoSuchElementFoundException;
     public List<Airplane> findAllAirplaneByAirline(Airline airline) throws NoSuchElementFoundException;
+
+    List<Airline> getAll();
 }

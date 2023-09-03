@@ -12,12 +12,13 @@ public record AirlineDTO(
         String iataCode,
         @Size(min = 3,max = 3,message = "Icao code have 2 characters")
         String icaoCode,
-        String callsign,
-        ActiveStatus activeStatus,
-        Integer fleetSize,
-        Double fleetAverageAge,
-        Integer yearFounded,
-        CountryDTO countryDTO,
+       // String callsign,
+       // ActiveStatus activeStatus,
+       // Integer fleetSize,
+       // Double fleetAverageAge,
+       // Integer yearFounded,
+        //CountryDTO countryDTO,
+        String country,
         String image
 ) {
 }

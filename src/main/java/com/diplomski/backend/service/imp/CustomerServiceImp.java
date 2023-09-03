@@ -1,9 +1,12 @@
 package com.diplomski.backend.service.imp;
 
 import com.diplomski.backend.domain.Customer;
+import com.diplomski.backend.domain.User;
 import com.diplomski.backend.domain.enumeration.AccountStatus;
 import com.diplomski.backend.domain.enumeration.Role;
 import com.diplomski.backend.exception.BadRequestAirportException;
+import com.diplomski.backend.exception.BadRequestCustomerException;
+import com.diplomski.backend.exception.ErrorResponse;
 import com.diplomski.backend.exception.NoSuchElementFoundException;
 import com.diplomski.backend.repository.CustomerRepository;
 import com.diplomski.backend.service.CustomerService;
@@ -18,7 +21,11 @@ public class CustomerServiceImp implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
     @Override
-    public Customer registration(Customer customer) {
+    public Customer registration(Customer customer) throws BadRequestCustomerException  {
+        Optional<Customer> optionalCustomer=customerRepository.findByEmail(customer.getEmail());
+        if(optionalCustomer.isPresent()){
+            throw new BadRequestCustomerException("Email already exists in base!");
+        }
         customer.setAccountStatus(AccountStatus.ACTIVE);
         customer.setRole(Role.CUSTOMER);
         customer.setRegistrationTime(LocalDateTime.now());
@@ -42,4 +49,6 @@ public class CustomerServiceImp implements CustomerService {
         }
         return optionalCustomer.get();
     }
+
+
 }
