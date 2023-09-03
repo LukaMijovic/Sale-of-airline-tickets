@@ -57,18 +57,18 @@ public class RouteServiceImp implements RouteService {
 
     @Override
     public Route createRoute(RouteRequest routeRequest) throws NoSuchElementFoundException {
-        Airport depAirport=airportService.findById(routeRequest.departureId());
-        Airport arrAirport=airportService.findById(routeRequest.arrivalId());
+        Airport depAirport=airportService.findById(routeRequest.depAirportId());
+        Airport arrAirport=airportService.findById(routeRequest.arrAirportId());
         Airline airline=airlineService.findById(routeRequest.airlineId());
 
         Route route=new Route();
         route.setAirline(airline);
         route.setDepartureAirport(depAirport);
         route.setArrivalAirport(arrAirport);
-        route.setDepartureTerminal(routeRequest.departureTerminal());
-        route.setArrivalTerminal(routeRequest.arrivalTerminal());
-        route.setDepartureTime(LocalTime.parse(routeRequest.departureTime(), DateTimeFormatter.ofPattern("HH:mm")));
-        route.setArrivalTime(LocalTime.parse(routeRequest.arrivalTime(), DateTimeFormatter.ofPattern("HH:mm")));
+        route.setDepartureTerminal(routeRequest.depTerminal());
+        route.setArrivalTerminal(routeRequest.arrTerminal());
+        route.setDepartureTime(LocalTime.parse(routeRequest.depTime(), DateTimeFormatter.ofPattern("HH:mm")));
+        route.setArrivalTime(LocalTime.parse(routeRequest.arrTime(), DateTimeFormatter.ofPattern("HH:mm")));
         route.setCreatedDate(LocalDateTime.now());
         route.setFlight(new Random().nextInt(9999)+1);
         route.setIataFlight(airline.getIataCode()+route.getFlight());
