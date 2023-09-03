@@ -65,7 +65,8 @@ public class BookingController {
         try{
             Booking booking=bookingService.payBooking(bookingId);
             return new BookingResponse(booking.getId(),true);
-        }catch (NoSuchElementFoundException ex){
+        }catch (Exception ex){
+            ex.printStackTrace();
             return new BookingResponse(-1L,false);
         }
     }
