@@ -23,7 +23,7 @@ public class RouteController {
             return new BookingResponse(route.getId(),true);
         }catch (Exception ex){
             ex.printStackTrace();
-            return new BookingResponse(-1l,false);
+            return new BookingResponse(-1L,false);
         }
     }
 }
