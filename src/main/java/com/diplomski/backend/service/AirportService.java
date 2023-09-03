@@ -14,4 +14,5 @@ public interface AirportService {
     List<Airport> getByCity(String city) throws Exception;
 
     Page<Airport> getByCityStep(String city);
+    Airport findById(Long id) throws NoSuchElementFoundException;
 }

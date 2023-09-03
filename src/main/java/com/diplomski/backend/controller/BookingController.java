@@ -1,6 +1,7 @@
 package com.diplomski.backend.controller;
 
 import com.diplomski.backend.domain.Booking;
+import com.diplomski.backend.dto.BookingAdmin;
 import com.diplomski.backend.dto.BookingCustomerDTO;
 import com.diplomski.backend.dto.BookingDTO;
 import com.diplomski.backend.dto.BookingResponse;
@@ -68,5 +69,9 @@ public class BookingController {
     @GetMapping("/v1/get-all/paid/{customerId}")
     public List<BookingCustomerDTO> getBookingPaidByCustomer(@PathVariable Long customerId){
         return bookingCustomerMapper.entitiesToDTOs(bookingService.getBookingPaidByCustomer(customerId));
+    }
+    @GetMapping("/v1/admin/get-all")
+    public List<BookingAdmin> getAllBookings(){
+        return null;
     }
 }

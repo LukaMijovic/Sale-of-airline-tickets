@@ -14,4 +14,6 @@ public interface AirlineService {
     public List<Airplane> findAllAirplaneByAirline(Airline airline) throws NoSuchElementFoundException;
 
     List<Airline> getAll();
+
+    Airline findById(Long airlineId) throws NoSuchElementFoundException;
 }

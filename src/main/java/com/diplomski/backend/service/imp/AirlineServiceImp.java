@@ -56,4 +56,13 @@ public class AirlineServiceImp implements AirlineService {
     public List<Airline> getAll() {
         return airlineRepository.findAll();
     }
+
+    @Override
+    public Airline findById(Long airlineId) throws NoSuchElementFoundException {
+        Optional<Airline> optionalAirline=airlineRepository.findById(airlineId);
+        if(!optionalAirline.isPresent()){
+            throw new NoSuchElementFoundException("The airline with id "+airlineId+" does not exist!");
+        }
+        return optionalAirline.get();
+    }
 }

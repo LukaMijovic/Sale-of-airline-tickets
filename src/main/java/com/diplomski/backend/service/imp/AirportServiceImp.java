@@ -54,4 +54,13 @@ public class AirportServiceImp implements AirportService {
         Pageable pageable=PageRequest.of(0,10);
         return airportRepository.findByCityNameIgnoreCaseStartingWith(pageable,city);
     }
+
+    @Override
+    public Airport findById(Long id) throws NoSuchElementFoundException {
+        Optional<Airport> optionalAirport=airportRepository.findById(id);
+        if(!optionalAirport.isPresent()){
+            throw new NoSuchElementFoundException("THe airport with id "+id+" does not exist!");
+        }
+        return optionalAirport.get();
+    }
 }
