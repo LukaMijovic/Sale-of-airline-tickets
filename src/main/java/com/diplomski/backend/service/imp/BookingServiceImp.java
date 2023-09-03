@@ -4,13 +4,16 @@ import com.diplomski.backend.domain.*;
 import com.diplomski.backend.domain.enumeration.ReservationStatus;
 import com.diplomski.backend.domain.enumeration.SeatClass;
 import com.diplomski.backend.dto.request.BookingRequest;
+import com.diplomski.backend.email.EmailService;
 import com.diplomski.backend.exception.NoSuchElementFoundException;
 import com.diplomski.backend.repository.BookingRepository;
 import com.diplomski.backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,8 @@ public class BookingServiceImp implements BookingService {
     private SeatStatusService seatStatusService;
     @Autowired
     private TicketService ticketService;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public Booking createBooking(BookingRequest bookingRequest) throws NoSuchElementFoundException {
@@ -104,7 +109,7 @@ public class BookingServiceImp implements BookingService {
     }
 
     @Override
-    public Booking payBooking(Long id) throws NoSuchElementFoundException {
+    public Booking payBooking(Long id) throws NoSuchElementFoundException, MalformedURLException, FileNotFoundException {
         Optional<Booking> optionalBooking =bookingRepository.findById(id);
         if(!optionalBooking.isPresent()){
             throw new NoSuchElementFoundException("The booking with id "+id+" does not exist!");
@@ -115,6 +120,7 @@ public class BookingServiceImp implements BookingService {
         }
         booking.setStatus(ReservationStatus.CONFIRMED);
         seatStatusService.payReservationSeat(booking.getTickets().get(0).getSeatStatus());
+        emailService.sendTicket(booking.getCustomer().getEmail(),booking.getTickets().get(0));
         return bookingRepository.save(booking);
     }
 
