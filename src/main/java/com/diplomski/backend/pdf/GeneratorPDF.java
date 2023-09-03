@@ -17,7 +17,9 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -25,13 +27,17 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
 @Component
-@RequiredArgsConstructor
+@Data
 public class GeneratorPDF {
-    private final Ticket ticket;
+    //private final Ticket ticket;
+    private Ticket ticket;
     private String ticketName;
+
+
+
     public void createTicketPdf() throws FileNotFoundException, MalformedURLException {
         String ticketName=ticket.getBooking().getCustomer().getFirstName().toLowerCase()+"_"+ticket.getBooking().getCustomer().getLastName()+"_"+ticket.getCode();
-        String path="tickets/"+ticketName+".pdf";
+        String path="C:\\Users\\Mihajlo.DESKTOP-T538ONP\\Desktop\\Diplomski\\backend-v1\\backend\\src\\main\\java\\com\\diplomski\\backend\\pdf\\"+ticketName+".pdf";
         PdfWriter pdfWriter=new PdfWriter(path);
         PdfDocument pdfDocument=new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -125,8 +131,8 @@ public class GeneratorPDF {
         bodyFlightTable3.addCell(new Cell().add(ticket.getBooking().getFlight().getArrScheduled().toString()).setFontColor(Color.DARK_GRAY).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER).setMarginRight(15f));
 
         bodyFlightTable3.addCell(new Cell().add("Terminal").setFontColor(Color.BLACK).setTextAlignment(TextAlignment.LEFT).setBorder(Border.NO_BORDER));
-        bodyFlightTable3.addCell(new Cell().add(ticket.getBooking().getFlight().getRoute().getDepartureTerminal()).setFontColor(Color.DARK_GRAY).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
-        bodyFlightTable3.addCell(new Cell().add(ticket.getBooking().getFlight().getRoute().getArrivalTerminal()).setFontColor(Color.DARK_GRAY).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER).setMarginRight(15f));
+        bodyFlightTable3.addCell(new Cell().add(ticket.getBooking().getFlight().getRoute().getDepartureTerminal()!=null?ticket.getBooking().getFlight().getRoute().getDepartureTerminal():"/").setFontColor(Color.DARK_GRAY).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+        bodyFlightTable3.addCell(new Cell().add(ticket.getBooking().getFlight().getRoute().getArrivalTerminal()!=null?ticket.getBooking().getFlight().getRoute().getArrivalTerminal():"/").setFontColor(Color.DARK_GRAY).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER).setMarginRight(15f));
         document.add(bodyFlightTable3.setMarginBottom(20f));
 
         // Border dgb=new DashedBorder(Color.GRAY,0.5f);

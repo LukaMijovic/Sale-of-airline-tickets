@@ -44,10 +44,11 @@ public class EmailService {
             helper.setSubject("Air Sales Application | Ticket Buying Notification");
             helper.setText("Hi, "+ticket.getBooking().getCustomer().getFirstName()+" there is your ticket in pdf format.\nWe wish you a nice trip!");
 
-            GeneratorPDF generatorPDF=new GeneratorPDF(ticket);
+            GeneratorPDF generatorPDF=new GeneratorPDF();
+            generatorPDF.setTicket(ticket);
             generatorPDF.createTicketPdf();
             ClassPathResource pdf=new ClassPathResource("tickets/"+generatorPDF.getFileName()+".pdf");
-            String pathPdf="tickets/"+generatorPDF.getFileName()+".pdf";
+            String pathPdf="C:\\Users\\Mihajlo.DESKTOP-T538ONP\\Desktop\\Diplomski\\backend-v1\\backend\\src\\main\\java\\com\\diplomski\\backend\\pdf\\"+generatorPDF.getFileName()+".pdf";
             FileSystemResource file=new FileSystemResource(new File(pathPdf));
             helper.addAttachment(file.getFilename(), file);
 
