@@ -48,4 +48,10 @@ public class AirportServiceImp implements AirportService {
         City city=cityService.findByName(cityName);
         return airportRepository.findByCity(city);
     }
+
+    @Override
+    public Page<Airport> getByCityStep(String city) {
+        Pageable pageable=PageRequest.of(0,10);
+        return airportRepository.findByCityNameIgnoreCaseStartingWith(pageable,city);
+    }
 }

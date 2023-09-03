@@ -34,4 +34,13 @@ public class AirportController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
+    @GetMapping("/v2/get-by-city/{city}")
+    public ResponseEntity<Object> getAirportSByCityStep(@PathVariable String city){
+        try{
+            return ResponseEntity.ok(airportMapper.entitiesToDTOs(airportService.getByCityStep(city)));
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+    }
 }

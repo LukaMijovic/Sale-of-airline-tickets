@@ -12,4 +12,6 @@ public interface AirportService {
     public boolean existByCityName(String name);
 
     List<Airport> getByCity(String city) throws Exception;
+
+    Page<Airport> getByCityStep(String city);
 }

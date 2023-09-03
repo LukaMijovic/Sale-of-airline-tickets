@@ -17,7 +17,8 @@ public class AirportMapper implements Mapper<Airport, AirportDTO> {
                 entity.getId(),
                 entity.getName(),
                 entity.getIataCode(),
-                entity.getIcaoCode()
+                entity.getIcaoCode(),
+               entity.getCity().getName()+","+entity.getCountry().getName()
                // entity.getLatitude(),
                 //entity.getLongitude(),
                 //entity.getPhoneNumber(),
