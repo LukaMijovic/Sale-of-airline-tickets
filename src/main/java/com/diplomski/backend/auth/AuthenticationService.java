@@ -1,8 +1,11 @@
 package com.diplomski.backend.auth;
 
 import com.diplomski.backend.config.JwtService;
+import com.diplomski.backend.domain.Admin;
 import com.diplomski.backend.domain.Customer;
 import com.diplomski.backend.domain.User;
+import com.diplomski.backend.domain.enumeration.Role;
+import com.diplomski.backend.dto.AdminResponse;
 import com.diplomski.backend.dto.mapper.CustomerMapper;
 import com.diplomski.backend.dto.request.CustomerRegistration;
 import com.diplomski.backend.exception.BadRequestCustomerException;
@@ -49,7 +52,7 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-    public AuthResponse login (AuthRequest request) throws NoSuchElementFoundException {
+    public Object login (AuthRequest request) throws NoSuchElementFoundException {
         //User user = userRepository.findByEmail(request.getEmail())
          //       .orElseThrow();
         Optional<User> optionalUser=userRepository.findByEmailAndPassword(request.getEmail(),request.getPassword());
@@ -57,12 +60,17 @@ public class AuthenticationService {
             throw new NoSuchElementFoundException("Email or password is not correct!");
         }
         User user=optionalUser.get();
-        Customer customer=customerService.findById(user.getId());
         String jwtToken = jwtService.generateToken(user);
-        return AuthResponse.builder()
-                .customerDTO(customerMapper.entityToDTO(customer))
-                .token(jwtToken)
-                .build();
+        if(user.getRole()== Role.CUSTOMER){
+            Customer customer=customerService.findById(user.getId());
+            return AuthResponse.builder()
+                    .customerDTO(customerMapper.entityToDTO(customer))
+                    .token(jwtToken)
+                    .build();
+        }else {
+            return new AdminResponse(jwtToken,true);
+        }
+
     }
 
     public Customer registration(CustomerRegistration customerRegistration) throws BadRequestCustomerException {
