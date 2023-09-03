@@ -118,6 +118,11 @@ public class BookingServiceImp implements BookingService {
         return bookingRepository.save(booking);
     }
 
+    @Override
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
+    }
+
     private Seat findFirstEmptySeat(String seatClassPom,List<Seat> seats) throws NoSuchElementFoundException{
         for(Seat seat:seats){
             SeatClass seatClass=SeatClass.valueOf(seatClassPom);
